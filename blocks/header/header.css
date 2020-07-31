@@ -1,7 +1,7 @@
 .header {
   max-width: 882px;
   margin: 0 auto;
-  padding-top: 44px;
+  padding: 45px 0 40.6px 0;
   background-color: #000000;
   display: flex;
   align-items: flex-start;
@@ -10,6 +10,6 @@
 
 @media screen and (max-width: 1023px) {
   .header {
-    padding-top: 28px;
+    padding: 28px 0 31.6px 27px;
   }
 }
