@@ -1,0 +1,17 @@
+.profile__name {
+  margin: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.33;
+  word-break: break-word;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 569px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 2.07;
+  }
+}

@@ -1,0 +1,22 @@
+.profile__edit-button {
+  align-self: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 0;
+  background-color: #000000;
+  background-image: url(../../../images/profile/mesto-profile-edit-button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 569px) {
+  .profile__edit-button {
+    margin-left: 7px;
+    width: 18px;
+    height: 18px;
+  }
+}
