@@ -1,0 +1,15 @@
+.photos__like-button {
+  position: absolute;
+  bottom: 30px;
+  left: 250px;
+  width: 21.76px;
+  height: 19.3px;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-image: url(../../../images/photos/photos-like-button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+}
