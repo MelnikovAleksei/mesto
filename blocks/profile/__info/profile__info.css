@@ -1,11 +1,11 @@
-.profile__text {
+.profile__info {
   align-self: center;
   padding: 0 17px 0 30px;
   max-width: 350px;
 }
 
 @media screen and (max-width: 569px) {
-  .profile__text {
+  .profile__info {
     padding: 0;
     max-width: 189px;
   }
