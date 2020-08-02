@@ -27,3 +27,10 @@
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
+
+@import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__header/edit-form__header.css);
+@import url(../blocks/edit-form/__input-name/edit-form__input-name.css);
+@import url(../blocks/edit-form/__input-caption/edit-form__input-caption.css);
+@import url(../blocks/edit-form/__save-button/edit-form__save-button.css);
+@import url(../blocks/edit-form/__close-button/edit-form__close-button.css);
