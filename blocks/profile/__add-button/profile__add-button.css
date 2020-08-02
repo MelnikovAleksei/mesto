@@ -11,6 +11,16 @@
   background-position: center;
   background-repeat: no-repeat;
   align-self: center;
+  transition: opacity .3s ease;
+}
+
+.profile__add-button:hover {
+  border: 2px solid #FFFFFF;
+  opacity: 0.6;
+}
+
+.profile__add-button:focus {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 699px) {

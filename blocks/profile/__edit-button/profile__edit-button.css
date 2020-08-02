@@ -11,6 +11,16 @@
   background-image: url(../../../images/profile/mesto-profile-edit-button.svg);
   background-position: center;
   background-repeat: no-repeat;
+  transition: opacity .3s ease;
+}
+
+.profile__edit-button:hover {
+  border: 2px solid #FFFFFF;
+  opacity: 0.6;
+}
+
+.profile__edit-button:focus {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 569px) {
