@@ -13,6 +13,7 @@
   line-height: 1.2;
   text-align: center;
   color: #FFFFFF;
+  cursor: pointer;
   transition: opacity .3s ease;
 }
 

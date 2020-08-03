@@ -1,7 +1,7 @@
 .edit-form__input-name {
   margin: 17px 0 0 0;
-  padding: 13px 0 13px 0;
-  width: 358px;
+  padding: 13px 5px 13px 5px;
+  width: 348px;
   height: 14px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
