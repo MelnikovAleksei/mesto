@@ -30,7 +30,6 @@
 
 @media screen and (max-width: 424px) {
   .edit-form__close-button {
-    top: -40px;
     right: 0;
   }
 }
