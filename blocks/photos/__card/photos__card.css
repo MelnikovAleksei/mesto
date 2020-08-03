@@ -2,4 +2,6 @@
   position: relative;
   justify-self: center;
   max-width: 282px;
+  overflow: hidden;
+  border-radius: 10px;
 }
