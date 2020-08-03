@@ -75,13 +75,15 @@
     <p class="footer__author">&copy; Mesto Russia</p>
   </footer>
   <div class="popup">
-    <form class="popup__container edit-form" name="info">
-      <h3 class="edit-form__header">Редактировать профиль</h3>
-      <input class="edit-form__input" type="text" id="profile-name" aria-label="Имя" placeholder="Имя" name="name" required>
-      <input class="edit-form__input" type="text" id="profile-caption" aria-label="Подпись" placeholder="Подпись" name="caption" required>
-      <button class="edit-form__save-button">Сохранить</button>
+    <div class="popup__container">
+      <form class="edit-form" name="info">
+        <h3 class="edit-form__header">Редактировать профиль</h3>
+        <input class="edit-form__input" type="text" id="profile-name" aria-label="Имя" placeholder="Имя" name="name" required>
+        <input class="edit-form__input" type="text" id="profile-caption" aria-label="Подпись" placeholder="Подпись" name="caption" required>
+        <button class="edit-form__save-button">Сохранить</button>
+      </form>
       <button class="edit-form__close-button" aria-label="закрыть форму"></button>
-    </form>
+    </div>
   </div>
   <script src="./scripts/index.js"></script>
 </body>
