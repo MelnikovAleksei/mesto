@@ -1,0 +1,6 @@
+.popup__container {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}

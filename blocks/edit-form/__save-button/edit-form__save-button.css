@@ -1,7 +1,7 @@
 .edit-form__save-button {
   width: 358px;
   height: 50px;
-  padding: 0;
+  padding: 13.66px 0 18.49px 0;
   margin: 48px 0 30px 0;
   background-color: #000000;
   border: 2px solid #000000;
@@ -28,5 +28,6 @@
 @media screen and (max-width: 767px) {
   .edit-form__save-button {
     width: 200px;
+    margin: 30px 0 20px 0;
   }
 }
