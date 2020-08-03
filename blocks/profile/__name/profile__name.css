@@ -5,7 +5,9 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 1.33;
-  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   color: #FFFFFF;
 }
 
