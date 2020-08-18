@@ -77,3 +77,4 @@ function saveForm(evt) {
 profileEditButton.addEventListener('click', openPopUp);
 popUpCloseButton.addEventListener('click', closePopUp);
 editForm.addEventListener('submit', saveForm);
+initializePhotos(initialCards)
