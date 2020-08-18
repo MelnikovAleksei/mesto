@@ -1,4 +1,4 @@
-.edit-form__header {
+.form__header {
   width: 358px;
   margin: 0 0 24px 0;
   font-family: 'Inter', Arial, sans-serif;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .edit-form__header {
+  .form__header {
     width: 200px;
   }
 }

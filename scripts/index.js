@@ -28,6 +28,8 @@ const initialCards = [
 let popUp = document.querySelector('.popup');
 let popUpEdit = document.querySelector('.popup-edit');
 let popUpEditCloseButton = popUp.querySelector('.popup-edit__close-button');
+let popUpAdd = document.querySelector('.popup-add');
+let popUpAddCloseButton = popUp.querySelector('.popup-add__close-button');
 
 let editForm = document.querySelector('.edit-form');
 let inputName = editForm.querySelector('#profile-name');

@@ -1,4 +1,4 @@
-.edit-form__save-button {
+.form__save-button {
   width: 358px;
   height: 50px;
   padding: 13.66px 0 18.49px 0;
@@ -17,16 +17,16 @@
   transition: opacity .3s ease;
 }
 
-.edit-form__save-button:hover {
+.form__save-button:hover {
   opacity: .8;
 }
 
-.edit-form__save-button:focus {
+.form__save-button:focus {
   opacity: .8;
 }
 
 @media screen and (max-width: 767px) {
-  .edit-form__save-button {
+  .form__save-button {
     width: 200px;
     margin: 30px 0 20px 0;
   }
