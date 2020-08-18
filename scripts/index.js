@@ -49,6 +49,12 @@ function addPhotosElement(name, link) {
   photosList.append(photosCard);
 }
 
+function initializePhotos(arr) {
+  arr.forEach(elem => {
+    addPhotosElement(elem.name, elem.link);
+  });
+}
+
 function openPopUp() {
   inputName.value = profileName.textContent;
   inputCaption.value = profileCaption.textContent;
