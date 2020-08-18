@@ -26,62 +26,93 @@ const initialCards = [
 ];
 
 let popUp = document.querySelector('.popup');
+
 let popUpEdit = document.querySelector('.popup-edit');
-let popUpEditCloseButton = popUp.querySelector('.popup-edit__close-button');
+let popUpEditCloseButton = popUpEdit.querySelector('.popup-edit__close-button');
+
 let popUpAdd = document.querySelector('.popup-add');
-let popUpAddCloseButton = popUp.querySelector('.popup-add__close-button');
+let popUpAddCloseButton = popUpAdd.querySelector('.popup-add__close-button');
 
 let editForm = document.querySelector('.edit-form');
-let inputName = editForm.querySelector('#profile-name');
-let inputCaption = editForm.querySelector('#profile-caption');
+let inputProfileName = editForm.querySelector('#profile-name');
+let inputProfileCaption = editForm.querySelector('#profile-caption');
+
+let addForm = document.querySelector('.add-form');
+let inputPhotoName = addForm.querySelector('#photo-name');
+let inputPhotoLink = addForm.querySelector('#photo-link');
 
 let profile = document.querySelector('.profile');
 let profileEditButton = profile.querySelector('.profile__edit-button');
 let profileName = profile.querySelector('.profile__name');
 let profileCaption = profile.querySelector('.profile__caption');
 
+let photosAddButton = profile.querySelector('.profile__add-button');
+
 let photosList = document.querySelector('.photos__list');
 
-function addPhotosElement(name, link) {
+function addPhotosElement(name, link, where) {
   const photosElement = document.querySelector('#photos-element').content;
   const photosCard = photosElement.cloneNode(true);
   console.log(photosCard);
   photosCard.querySelector('.photos__image').src = link;
-  photosCard.querySelector('.photos__image').alt = 'фотография' + name;
+  photosCard.querySelector('.photos__image').alt = 'фотография ' + name;
   photosCard.querySelector('.photos__figcaption').textContent = name;
-  photosList.append(photosCard);
+  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard)
 }
 
 function initializePhotos(arr) {
   arr.forEach(elem => {
-    addPhotosElement(elem.name, elem.link);
+    addPhotosElement(elem.name, elem.link, 'append');
   });
 }
 
 function initializeProfileInfo() {
-  inputName.value = profileName.textContent;
-  inputCaption.value = profileCaption.textContent;
+  inputProfileName.value = profileName.textContent;
+  inputProfileCaption.value = profileCaption.textContent;
+}
+
+function emptyInputValue(...inputs) {
+  inputs.map(elem => elem.value = '')
+}
+
+function addCard(evt) {
+  evt.preventDefault();
+  addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
+  emptyInputValue(inputPhotoName, inputPhotoLink);
+  closePopUpAdd()
 }
 
 function openPopUpEdit() {
   initializeProfileInfo();
   popUpEdit.classList.add('popup_opened');
-  inputName.focus();
+}
+
+function openPopUpAdd() {
+  popUpAdd.classList.add('popup_opened');
 }
 
 function closePopUpEdit() {
   popUpEdit.classList.remove('popup_opened');
 }
 
-function profileSaveForm(evt) {
-  evt.preventDefault();
-  profileName.textContent = inputName.value;
-  profileCaption.textContent = inputCaption.value;
-  closePopUpEdit();
+function closePopUpAdd() {
+  emptyInputValue(inputPhotoName, inputPhotoLink);
+  popUpAdd.classList.remove('popup_opened');
 }
 
+function profileSaveForm(evt) {
+  evt.preventDefault();
+  profileName.textContent = inputProfileName.value;
+  profileCaption.textContent = inputProfileCaption.value;
+  closePopUpEdit();
+}
 
 profileEditButton.addEventListener('click', openPopUpEdit);
 popUpEditCloseButton.addEventListener('click', closePopUpEdit);
 editForm.addEventListener('submit', profileSaveForm);
+
+photosAddButton.addEventListener('click', openPopUpAdd);
+popUpAddCloseButton.addEventListener('click', closePopUpAdd);
+addForm.addEventListener('submit', addCard);
+
 initializePhotos(initialCards)
