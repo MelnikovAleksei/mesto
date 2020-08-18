@@ -26,7 +26,8 @@ const initialCards = [
 ];
 
 let popUp = document.querySelector('.popup');
-let popUpCloseButton = popUp.querySelector('.popup__close-button');
+let popUpEdit = document.querySelector('.popup-edit');
+let popUpEditCloseButton = popUp.querySelector('.popup-edit__close-button');
 
 let editForm = document.querySelector('.edit-form');
 let inputName = editForm.querySelector('#profile-name');
@@ -55,26 +56,30 @@ function initializePhotos(arr) {
   });
 }
 
-function openPopUp() {
+function initializeProfileInfo() {
   inputName.value = profileName.textContent;
   inputCaption.value = profileCaption.textContent;
-  popUp.classList.add('popup_opened');
+}
+
+function openPopUpEdit() {
+  initializeProfileInfo();
+  popUpEdit.classList.add('popup_opened');
   inputName.focus();
 }
 
-function closePopUp() {
-  popUp.classList.remove('popup_opened');
+function closePopUpEdit() {
+  popUpEdit.classList.remove('popup_opened');
 }
 
-function saveForm(evt) {
+function profileSaveForm(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileCaption.textContent = inputCaption.value;
-  closePopUp();
+  closePopUpEdit();
 }
 
 
-profileEditButton.addEventListener('click', openPopUp);
-popUpCloseButton.addEventListener('click', closePopUp);
-editForm.addEventListener('submit', saveForm);
+profileEditButton.addEventListener('click', openPopUpEdit);
+popUpEditCloseButton.addEventListener('click', closePopUpEdit);
+editForm.addEventListener('submit', profileSaveForm);
 initializePhotos(initialCards)

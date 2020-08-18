@@ -33,7 +33,7 @@
   <footer class="footer">
     <p class="footer__author">&copy; Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup-edit">
     <div class="popup__container">
       <form class="edit-form" name="info">
         <h3 class="edit-form__header">Редактировать профиль</h3>
@@ -41,7 +41,18 @@
         <input class="edit-form__input" type="text" id="profile-caption" aria-label="Подпись" placeholder="Подпись" name="caption" required>
         <button class="edit-form__save-button">Сохранить</button>
       </form>
-      <button class="popup__close-button" aria-label="закрыть форму"></button>
+      <button class="popup__close-button popup-edit__close-button" aria-label="закрыть форму"></button>
+    </div>
+  </div>
+  <div class="popup popup-add">
+    <div class="popup__container">
+      <form class="edit-form" name="info">
+        <h3 class="edit-form__header">Редактировать профиль</h3>
+        <input class="edit-form__input" type="text" id="profile-name" aria-label="Имя" placeholder="Имя" name="name" required>
+        <input class="edit-form__input" type="text" id="profile-caption" aria-label="Подпись" placeholder="Подпись" name="caption" required>
+        <button class="edit-form__save-button">Сохранить</button>
+      </form>
+      <button class="popup__close-button popup-add__close-button" aria-label="закрыть форму"></button>
     </div>
   </div>
   <template id="photos-element">
