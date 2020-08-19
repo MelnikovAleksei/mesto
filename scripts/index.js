@@ -48,7 +48,10 @@ let profileCaption = profile.querySelector('.profile__caption');
 
 let photosAddButton = profile.querySelector('.profile__add-button');
 
-let photosList = document.querySelector('.photos__list');
+let photos = document.querySelector('.photos');
+let photosList = photos.querySelector('.photos__list');
+
+
 
 function addPhotosElement(name, link, where = 'append') {
   const photosElement = document.querySelector('#photos-element').content;
@@ -107,6 +110,10 @@ function profileSaveForm(evt) {
   closePopUpEdit();
 }
 
+function likePhoto(evt) {
+  evt.target.classList.toggle('photos__like-button_liked')
+}
+
 profileEditButton.addEventListener('click', openPopUpEdit);
 popUpEditCloseButton.addEventListener('click', closePopUpEdit);
 editForm.addEventListener('submit', profileSaveForm);
@@ -116,3 +123,10 @@ popUpAddCloseButton.addEventListener('click', closePopUpAdd);
 addForm.addEventListener('submit', addCard);
 
 initializePhotos(initialCards)
+
+
+let photosLikeButton = photosList.querySelectorAll('.photos__like-button');
+
+photosLikeButton.forEach(elem => {
+  elem.addEventListener('click', likePhoto);
+})
