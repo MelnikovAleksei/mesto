@@ -54,11 +54,14 @@ let photosList = photos.querySelector('.photos__list');
 function addPhotosElement(name, link, where = 'append') {
   const photosElement = document.querySelector('#photos-element').content;
   const photosCard = photosElement.cloneNode(true);
-  console.log(photosCard);
+  const photosLikeButton = photosCard.querySelector('.photos__like-button');
+  const photosDeleteButton = photosCard.querySelector('.photos__delete-button');
   photosCard.querySelector('.photos__image').src = link;
   photosCard.querySelector('.photos__image').alt = 'фотография ' + name;
   photosCard.querySelector('.photos__figcaption').textContent = name;
-  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard)
+  photosLikeButton.addEventListener('click', likePhoto);
+  photosDeleteButton.addEventListener('click', deleteButton);
+  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
 }
 
 function initializePhotos(arr) {
@@ -108,6 +111,14 @@ function profileSaveForm(evt) {
   closePopUpEdit();
 }
 
+function likePhoto(evt) {
+  evt.target.classList.toggle('photos__like-button_liked');
+}
+
+function deleteButton(evt) {
+  evt.target.closest('.photos__card').remove();
+}
+
 profileEditButton.addEventListener('click', openPopUpEdit);
 popUpEditCloseButton.addEventListener('click', closePopUpEdit);
 editForm.addEventListener('submit', profileSaveForm);
@@ -119,17 +130,7 @@ addForm.addEventListener('submit', addCard);
 initializePhotos(initialCards)
 
 
-let photosLikeButton = photosList.querySelectorAll('.photos__like-button');
-let photosDeleteButton = photosList.querySelectorAll('.photos__delete-button');
 
-photosLikeButton.forEach(elem => {
-  elem.addEventListener('click', function () {
-    elem.classList.toggle('photos__like-button_liked');
-  });
-})
 
-photosDeleteButton.forEach(elem => {
-  elem.addEventListener('click', function () {
-    elem.closest('.photos__card').remove();
-  })
-})
+
+
