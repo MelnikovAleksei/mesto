@@ -67,7 +67,7 @@ function addPhotosElement(name, link, where = 'append') {
   photosCard.querySelector('.photos__figcaption').textContent = name;
   photosImage.addEventListener('click', openPhoto);
   photosLikeButton.addEventListener('click', likePhoto);
-  photosDeleteButton.addEventListener('click', deleteButton);
+  photosDeleteButton.addEventListener('click', deletePhotoButton);
   where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
 }
 
@@ -122,8 +122,12 @@ function likePhoto(evt) {
   evt.target.classList.toggle('photos__like-button_liked');
 }
 
-function deleteButton(evt) {
+function deletePhotoButton(evt) {
   evt.target.closest('.photos__card').remove();
+}
+
+function closePhoto() {
+  popUpPhotos.classList.remove('popup_opened');
 }
 
 function openPhoto(evt) {
@@ -134,10 +138,6 @@ function openPhoto(evt) {
   popUpPhotosFigcaption.textContent = figcaption.textContent;
   popUpPhotosCloseButton.addEventListener('click', closePhoto);
   popUpPhotos.classList.add('popup_opened');
-}
-
-function closePhoto() {
-  popUpPhotos.classList.remove('popup_opened');
 }
 
 profileEditButton.addEventListener('click', openPopUpEdit);
