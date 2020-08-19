@@ -25,36 +25,36 @@ const initialCards = [
   }
 ];
 
-let popUp = document.querySelector('.popup');
+const popUp = document.querySelector('.popup');
 
-let popUpEdit = document.querySelector('.popup-edit');
-let popUpEditCloseButton = popUpEdit.querySelector('.popup-edit__close-button');
+const popUpEdit = document.querySelector('.popup-edit');
+const popUpEditCloseButton = popUpEdit.querySelector('.popup-edit__close-button');
 
-let popUpAdd = document.querySelector('.popup-add');
-let popUpAddCloseButton = popUpAdd.querySelector('.popup-add__close-button');
+const popUpAdd = document.querySelector('.popup-add');
+const popUpAddCloseButton = popUpAdd.querySelector('.popup-add__close-button');
 
-let popUpPhotos = document.querySelector('.popup-photos');
-let popUpPhotosImage = popUpPhotos.querySelector('.popup-photos__image');
-let popUpPhotosFigcaption = popUpPhotos.querySelector('.popup-photos__figcaption');
-let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-photos__close-button');
+const popUpPhotos = document.querySelector('.popup-photos');
+const popUpPhotosImage = popUpPhotos.querySelector('.popup-photos__image');
+const popUpPhotosFigcaption = popUpPhotos.querySelector('.popup-photos__figcaption');
+const popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-photos__close-button');
 
-let editForm = document.querySelector('.edit-form');
-let inputProfileName = editForm.querySelector('#profile-name');
-let inputProfileCaption = editForm.querySelector('#profile-caption');
+const editForm = document.querySelector('.edit-form');
+const inputProfileName = editForm.querySelector('#profile-name');
+const inputProfileCaption = editForm.querySelector('#profile-caption');
 
-let addForm = document.querySelector('.add-form');
-let inputPhotoName = addForm.querySelector('#photo-name');
-let inputPhotoLink = addForm.querySelector('#photo-link');
+const addForm = document.querySelector('.add-form');
+const inputPhotoName = addForm.querySelector('#photo-name');
+const inputPhotoLink = addForm.querySelector('#photo-link');
 
-let profile = document.querySelector('.profile');
-let profileEditButton = profile.querySelector('.profile__edit-button');
-let profileName = profile.querySelector('.profile__name');
-let profileCaption = profile.querySelector('.profile__caption');
+const profile = document.querySelector('.profile');
+const profileEditButton = profile.querySelector('.profile__edit-button');
+const profileName = profile.querySelector('.profile__name');
+const profileCaption = profile.querySelector('.profile__caption');
 
-let photosAddButton = profile.querySelector('.profile__add-button');
+const photosAddButton = profile.querySelector('.profile__add-button');
 
-let photos = document.querySelector('.photos');
-let photosList = photos.querySelector('.photos__list');
+const photos = document.querySelector('.photos');
+const photosList = photos.querySelector('.photos__list');
 
 function addPhotosElement(name, link, where = 'append') {
   const photosElement = document.querySelector('#photos-element').content;
@@ -127,9 +127,9 @@ function deleteButton(evt) {
 }
 
 function openPhoto(evt) {
-  let figure = evt.path[1];
-  let img = figure.querySelector('.photos__image');
-  let figcaption = figure.querySelector('.photos__figcaption');
+  const figure = evt.path[1];
+  const img = figure.querySelector('.photos__image');
+  const figcaption = figure.querySelector('.photos__figcaption');
   popUpPhotosImage.src = img.src;
   popUpPhotosFigcaption.textContent = figcaption.textContent;
   popUpPhotosCloseButton.addEventListener('click', closePhoto);
@@ -148,10 +148,4 @@ photosAddButton.addEventListener('click', openPopUpAdd);
 popUpAddCloseButton.addEventListener('click', closePopUpAdd);
 addForm.addEventListener('submit', addCard);
 
-initializePhotos(initialCards)
-
-
-
-
-
-
+initializePhotos(initialCards);
