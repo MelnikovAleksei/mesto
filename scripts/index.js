@@ -33,6 +33,11 @@ let popUpEditCloseButton = popUpEdit.querySelector('.popup-edit__close-button');
 let popUpAdd = document.querySelector('.popup-add');
 let popUpAddCloseButton = popUpAdd.querySelector('.popup-add__close-button');
 
+let popUpPhotos = document.querySelector('.popup-photos');
+let popUpPhotosImage = popUpPhotos.querySelector('.popup-photos__image');
+let popUpPhotosFigcaption = popUpPhotos.querySelector('.popup-photos__figcaption');
+let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-photos__close-button');
+
 let editForm = document.querySelector('.edit-form');
 let inputProfileName = editForm.querySelector('#profile-name');
 let inputProfileCaption = editForm.querySelector('#profile-caption');
@@ -54,11 +59,13 @@ let photosList = photos.querySelector('.photos__list');
 function addPhotosElement(name, link, where = 'append') {
   const photosElement = document.querySelector('#photos-element').content;
   const photosCard = photosElement.cloneNode(true);
+  const photosImage = photosCard.querySelector('.photos__image');
   const photosLikeButton = photosCard.querySelector('.photos__like-button');
   const photosDeleteButton = photosCard.querySelector('.photos__delete-button');
   photosCard.querySelector('.photos__image').src = link;
   photosCard.querySelector('.photos__image').alt = 'фотография ' + name;
   photosCard.querySelector('.photos__figcaption').textContent = name;
+  photosImage.addEventListener('click', openPhoto);
   photosLikeButton.addEventListener('click', likePhoto);
   photosDeleteButton.addEventListener('click', deleteButton);
   where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
@@ -117,6 +124,20 @@ function likePhoto(evt) {
 
 function deleteButton(evt) {
   evt.target.closest('.photos__card').remove();
+}
+
+function openPhoto(evt) {
+  let figure = evt.path[1];
+  let img = figure.querySelector('.photos__image');
+  let figcaption = figure.querySelector('.photos__figcaption');
+  popUpPhotosImage.src = img.src;
+  popUpPhotosFigcaption.textContent = figcaption.textContent;
+  popUpPhotosCloseButton.addEventListener('click', closePhoto);
+  popUpPhotos.classList.add('popup_opened');
+}
+
+function closePhoto() {
+  popUpPhotos.classList.remove('popup_opened');
 }
 
 profileEditButton.addEventListener('click', openPopUpEdit);
