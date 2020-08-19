@@ -51,8 +51,6 @@ let photosAddButton = profile.querySelector('.profile__add-button');
 let photos = document.querySelector('.photos');
 let photosList = photos.querySelector('.photos__list');
 
-
-
 function addPhotosElement(name, link, where = 'append') {
   const photosElement = document.querySelector('#photos-element').content;
   const photosCard = photosElement.cloneNode(true);
@@ -110,10 +108,6 @@ function profileSaveForm(evt) {
   closePopUpEdit();
 }
 
-function likePhoto(evt) {
-  evt.target.classList.toggle('photos__like-button_liked')
-}
-
 profileEditButton.addEventListener('click', openPopUpEdit);
 popUpEditCloseButton.addEventListener('click', closePopUpEdit);
 editForm.addEventListener('submit', profileSaveForm);
@@ -126,7 +120,16 @@ initializePhotos(initialCards)
 
 
 let photosLikeButton = photosList.querySelectorAll('.photos__like-button');
+let photosDeleteButton = photosList.querySelectorAll('.photos__delete-button');
 
 photosLikeButton.forEach(elem => {
-  elem.addEventListener('click', likePhoto);
+  elem.addEventListener('click', function () {
+    elem.classList.toggle('photos__like-button_liked');
+  });
+})
+
+photosDeleteButton.forEach(elem => {
+  elem.addEventListener('click', function () {
+    elem.closest('.photos__card').remove();
+  })
 })
