@@ -50,7 +50,7 @@ let photosAddButton = profile.querySelector('.profile__add-button');
 
 let photosList = document.querySelector('.photos__list');
 
-function addPhotosElement(name, link, where) {
+function addPhotosElement(name, link, where = 'append') {
   const photosElement = document.querySelector('#photos-element').content;
   const photosCard = photosElement.cloneNode(true);
   console.log(photosCard);
