@@ -56,8 +56,9 @@ const photosAddButton = profile.querySelector('.profile__add-button');
 const photos = document.querySelector('.photos');
 const photosList = photos.querySelector('.photos__list');
 
+const photosElement = document.querySelector('#photos-element').content;
+
 function addPhotosElement(name, link, where = 'append') {
-  const photosElement = document.querySelector('#photos-element').content;
   const photosCard = photosElement.cloneNode(true);
   const photosImage = photosCard.querySelector('.photos__image');
   const photosLikeButton = photosCard.querySelector('.photos__like-button');
@@ -68,7 +69,11 @@ function addPhotosElement(name, link, where = 'append') {
   photosImage.addEventListener('click', openPhoto);
   photosLikeButton.addEventListener('click', likePhoto);
   photosDeleteButton.addEventListener('click', deletePhotoButton);
-  where === 'append' ? photosList.append(photosCard) : photosList.prepend(photosCard);
+  if (where === 'append') {
+    photosList.append(photosCard);
+  } else if (where === 'prepend') {
+    photosList.prepend(photosCard);
+  }
 }
 
 function initializePhotos(arr) {
@@ -83,7 +88,7 @@ function initializeProfileInfo() {
 }
 
 function emptyInputValue(...inputs) {
-  inputs.map(elem => elem.value = '')
+  inputs.forEach(elem => elem.value = '')
 }
 
 function addCard(evt) {
@@ -136,7 +141,6 @@ function openPhoto(evt) {
   const figcaption = figure.querySelector('.photos__figcaption');
   popUpPhotosImage.src = img.src;
   popUpPhotosFigcaption.textContent = figcaption.textContent;
-  popUpPhotosCloseButton.addEventListener('click', closePhoto);
   popUpPhotos.classList.add('popup_opened');
 }
 
@@ -147,5 +151,6 @@ editForm.addEventListener('submit', profileSaveForm);
 photosAddButton.addEventListener('click', openPopUpAdd);
 popUpAddCloseButton.addEventListener('click', closePopUpAdd);
 addForm.addEventListener('submit', addCard);
+popUpPhotosCloseButton.addEventListener('click', closePhoto);
 
 initializePhotos(initialCards);
