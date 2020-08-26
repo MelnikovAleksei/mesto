@@ -25,7 +25,9 @@ const initialCards = [
   }
 ];
 
-const popUp = document.querySelector('.popup');
+const popUpList = document.querySelectorAll('.popup');
+
+const popUpCloseButtonList = document.querySelectorAll('.popup__close-button');
 
 const popUpEdit = document.querySelector('.popup-edit');
 const popUpEditCloseButton = popUpEdit.querySelector('.popup-edit__close-button');
@@ -66,9 +68,6 @@ function addPhotosElement(name, link, where = 'append') {
   photosCard.querySelector('.photos__image').src = link;
   photosCard.querySelector('.photos__image').alt = 'фотография ' + name;
   photosCard.querySelector('.photos__figcaption').textContent = name;
-  photosImage.addEventListener('click', openPhoto);
-  photosLikeButton.addEventListener('click', likePhoto);
-  photosDeleteButton.addEventListener('click', deletePhotoButton);
   if (where === 'append') {
     photosList.append(photosCard);
   } else if (where === 'prepend') {
@@ -98,12 +97,22 @@ function addCard(evt) {
   closePopUp(popUpAdd)
 }
 
+function eventHandler(evt) {
+  if (evt.target !== evt.path[4]) {
+    closePopUp(evt.target);
+  }
+}
+
 function openPopUp(element) {
   element.classList.add('popup_opened');
+  element.addEventListener('click', eventHandler);
+  document.addEventListener('keydown', escKeyHandler);
 }
 
 function closePopUp(element) {
   element.classList.remove('popup_opened');
+  element.removeEventListener('click', eventHandler);
+  document.removeEventListener('keydown', escKeyHandler);
 }
 
 function openPopUpEdit() {
@@ -127,37 +136,69 @@ function profileSaveForm(evt) {
   evt.preventDefault();
   profileName.textContent = inputProfileName.value;
   profileCaption.textContent = inputProfileCaption.value;
-  closePopUpEdit();
+  closePopUp(evt.target.parentElement.parentElement);
 }
 
 function likePhoto(evt) {
-  evt.target.classList.toggle('photos__like-button_liked');
+  if (evt.target.classList.contains('photos__like-button')) {
+    evt.target.classList.toggle('photos__like-button_liked');
+  }
 }
 
-function deletePhotoButton(evt) {
-  evt.target.closest('.photos__card').remove();
+function deletePhoto(evt) {
+  if (evt.target.classList.contains('photos__delete-button')) {
+    evt.target.closest('.photos__card').remove();
+  }
 }
 
-function closePhoto() {
-  popUpPhotos.classList.remove('popup_opened');
+function closePopUpPhoto() {
+  closePopUp(popUpPhotos);
 }
 
-function openPhoto(evt) {
-  const figure = evt.path[1];
-  const img = figure.querySelector('.photos__image');
-  const figcaption = figure.querySelector('.photos__figcaption');
-  popUpPhotosImage.src = img.src;
-  popUpPhotosFigcaption.textContent = figcaption.textContent;
-  popUpPhotos.classList.add('popup_opened');
+function openPopUpPhoto(evt) {
+  if (evt.target.classList.contains('photos__image')) {
+    const figure = evt.path[1];
+    const img = figure.querySelector('.photos__image');
+    const figcaption = figure.querySelector('.photos__figcaption');
+    popUpPhotosImage.src = img.src;
+    popUpPhotosFigcaption.textContent = figcaption.textContent;
+    openPopUp(popUpPhotos);
+  }
 }
+
+function escKeyHandler(evt) {
+  if (evt.key === 'Escape') {
+    if (popUpAdd.classList.contains('popup_opened')) {
+      closePopUp(popUpAdd);
+    } else if (popUpEdit.classList.contains('popup_opened')) {
+      closePopUp(popUpEdit);
+    } else if (popUpPhotos.classList.contains('popup_opened')) {
+      closePopUp(popUpPhotos);
+    }
+  }
+}
+
+popUpList.forEach(popup => {
+  popup.addEventListener('keydown', escKeyHandler)
+})
 
 profileEditButton.addEventListener('click', openPopUpEdit);
 popUpEditCloseButton.addEventListener('click', closePopUpEdit);
 editForm.addEventListener('submit', profileSaveForm);
 
+photosList.addEventListener('click', likePhoto);
+photosList.addEventListener('click', deletePhoto);
+photosList.addEventListener('click', openPopUpPhoto)
+
 photosAddButton.addEventListener('click', openPopUpAdd);
-popUpAddCloseButton.addEventListener('click', closePopUpAdd);
+
+popUpCloseButtonList.forEach(popUpCloseButton => {
+  popUpCloseButton.addEventListener('click', function (evt) {
+    console.log(evt.target.parentElement)
+    closePopUp(evt.target.parentElement.parentElement);
+  })
+})
+
 addForm.addEventListener('submit', addCard);
-popUpPhotosCloseButton.addEventListener('click', closePhoto);
 
 initializePhotos(initialCards);

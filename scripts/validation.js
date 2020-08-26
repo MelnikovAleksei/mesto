@@ -42,8 +42,10 @@ function checkInputValidity(formElement, inputElement) {
 
 function toggleSubmitButtonState(formInputs, formSubmitButton) {
   if (hasInvalidInput(formInputs)) {
+    formSubmitButton.disabled = true;
     formSubmitButton.classList.add(validationSettings.inactiveButtonClass);
   } else {
+    formSubmitButton.disabled = false;
     formSubmitButton.classList.remove(validationSettings.inactiveButtonClass);
   }
 }
