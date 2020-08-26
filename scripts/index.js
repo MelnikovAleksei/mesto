@@ -95,25 +95,32 @@ function addCard(evt) {
   evt.preventDefault();
   addPhotosElement(inputPhotoName.value, inputPhotoLink.value, 'prepend');
   emptyInputValue(inputPhotoName, inputPhotoLink);
-  closePopUpAdd()
+  closePopUp(popUpAdd)
+}
+
+function openPopUp(element) {
+  element.classList.add('popup_opened');
+}
+
+function closePopUp(element) {
+  element.classList.remove('popup_opened');
 }
 
 function openPopUpEdit() {
   initializeProfileInfo();
-  popUpEdit.classList.add('popup_opened');
+  openPopUp(popUpEdit);
 }
 
 function openPopUpAdd() {
-  popUpAdd.classList.add('popup_opened');
+  openPopUp(popUpAdd);
 }
 
 function closePopUpEdit() {
-  popUpEdit.classList.remove('popup_opened');
+  closePopUp(popUpEdit)
 }
 
 function closePopUpAdd() {
-  emptyInputValue(inputPhotoName, inputPhotoLink);
-  popUpAdd.classList.remove('popup_opened');
+  closePopUp(popUpAdd)
 }
 
 function profileSaveForm(evt) {
