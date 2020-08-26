@@ -8,14 +8,26 @@ const validationSettings = {
   errorClass: 'form__input-error_active',
 }
 
-function checkInputValidity(formElement, inputElement) {
-  console.log(formElement);
-  console.log(inputElement);
+function hasInvalidInput(formInputs) {
+  return formInputs.some(inputElement => {
+    return !inputElement.validity.valid;
+  })
 }
 
-function toggleSubmitButtonState(inputElement, formSubmitButton) {
-  console.log(inputElement);
-  console.log(formSubmitButton);
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    console.log('invalid');
+  } else {
+    console.log('valid');
+  }
+}
+
+function toggleSubmitButtonState(formInputs, formSubmitButton) {
+  if (hasInvalidInput(formInputs)) {
+    formSubmitButton.classList.add(validationSettings.inactiveButtonClass);
+  } else {
+    formSubmitButton.classList.remove(validationSettings.inactiveButtonClass);
+  }
 }
 
 function setEventListeners(formElement) {
