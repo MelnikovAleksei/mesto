@@ -8,6 +8,24 @@ const validationSettings = {
   errorClass: 'form__input-error_active',
 }
 
+function getErrorElement(formElement, inputElement) {
+  return formElement.querySelector(`#${inputElement.id}-error`);
+}
+
+function showInputError(formElement, inputElement, errorMessage) {
+  const errorElement = getErrorElement(formElement, inputElement);
+  inputElement.classList.add(validationSettings.inputErrorClass);
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(validationSettings.errorClass);
+}
+
+function hideInputError(formElement, inputElement) {
+  const errorElement = getErrorElement(formElement, inputElement);
+  inputElement.classList.remove(validationSettings.inputErrorClass);
+  errorElement.textContent = '';
+  errorElement.classList.remove(validationSettings.errorClass);
+}
+
 function hasInvalidInput(formInputs) {
   return formInputs.some(inputElement => {
     return !inputElement.validity.valid;
@@ -16,9 +34,9 @@ function hasInvalidInput(formInputs) {
 
 function checkInputValidity(formElement, inputElement) {
   if (!inputElement.validity.valid) {
-    console.log('invalid');
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    console.log('valid');
+    hideInputError(formElement, inputElement);
   }
 }
 
@@ -55,3 +73,5 @@ function enableValidation(settingsObject) {
     })
   })
 }
+
+enableValidation(validationSettings);
