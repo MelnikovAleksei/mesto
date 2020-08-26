@@ -194,7 +194,6 @@ photosAddButton.addEventListener('click', openPopUpAdd);
 
 popUpCloseButtonList.forEach(popUpCloseButton => {
   popUpCloseButton.addEventListener('click', function (evt) {
-    console.log(evt.target.parentElement)
     closePopUp(evt.target.parentElement.parentElement);
   })
 })
