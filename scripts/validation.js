@@ -9,7 +9,15 @@ const validationSettings = {
 }
 
 function setEventListeners(formElement) {
-  console.log(formElement);
+  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+  /* toggleSubmitButtonState */
+  formInputs.forEach(inputElement => {
+    inputElement.addEventListener('input', function (evt) {
+      /* checkInputValidity(formElement, inputElement); */
+      /* toggleSubmitButtonState(inputElement, formSubmitButton) */
+    })
+  })
 }
 
 
