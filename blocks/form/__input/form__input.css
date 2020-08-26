@@ -11,7 +11,10 @@
   font-size: 14px;
   line-height: 1.2;
   color: #000000;
+  transition: padding .3s ease;
 }
+
+
 
 @media screen and (max-width: 767px) {
   .form__input {
