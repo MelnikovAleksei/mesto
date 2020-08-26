@@ -35,10 +35,12 @@
   </footer>
   <div class="popup popup-edit">
     <div class="popup__container">
-      <form class="form edit-form" name="info">
+      <form class="form edit-form" name="info" novalidate>
         <h3 class="form__header">Редактировать профиль</h3>
         <input class="form__input" type="text" id="profile-name" aria-label="имя" placeholder="Имя" name="name" required minlength="2" maxlength="40">
+        <span class='form__input-error' id='profile-name-error'></span>
         <input class="form__input" type="text" id="profile-caption" aria-label="подпись" placeholder="Подпись" name="caption" required minlength="2" maxlength="200">
+        <span class='form__input-error' id='profile-caption-error'></span>
         <button class="form__save-button">Сохранить</button>
       </form>
       <button class="popup__close-button popup-edit__close-button" aria-label="закрыть форму"></button>
