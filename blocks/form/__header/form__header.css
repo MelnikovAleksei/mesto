@@ -14,9 +14,3 @@
     width: 200px;
   }
 }
-
-@media screen and (orientation: landscape) {
-  .form__header {
-    margin-bottom: 0;
-  }
-}

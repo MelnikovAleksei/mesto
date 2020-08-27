@@ -98,6 +98,7 @@ function addCard(evt) {
 }
 
 function eventHandler(evt) {
+  console.log(evt)
   if (evt.target !== evt.path[4]) {
     closePopUp(evt.target);
   }

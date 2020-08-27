@@ -4,9 +4,3 @@
   left: 50%;
   transform: translateX(-50%);
 }
-
-@media screen and (orientation: landscape) {
-  .popup__container {
-    top: 15%;
-  }
-}
