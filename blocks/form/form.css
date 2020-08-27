@@ -21,7 +21,7 @@
 @media screen and (max-height: 450px) {
   .form {
     min-height: 200px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }

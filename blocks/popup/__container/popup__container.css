@@ -7,6 +7,6 @@
 
 @media screen and (max-height: 450px) {
   .popup__container {
-    top: 10%;
+    top: 8%;
   }
 }

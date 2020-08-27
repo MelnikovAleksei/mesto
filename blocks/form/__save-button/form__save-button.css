@@ -37,6 +37,9 @@
 
 @media screen and (max-height: 450px) {
   .form__save-button {
+    height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
     margin-top: 5px;
     margin-bottom: 0;
   }

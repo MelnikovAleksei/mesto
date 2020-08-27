@@ -17,7 +17,7 @@
 
 @media screen and (max-height: 450px) {
   .form__header {
-    font-size: 20px;
-    margin-bottom: 0;
+    font-size: 18px;
+    margin-bottom: 5px;
   }
 }
