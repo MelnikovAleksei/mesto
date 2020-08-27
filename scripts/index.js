@@ -98,8 +98,7 @@ function addCard(evt) {
 }
 
 function eventHandler(evt) {
-  console.log(evt)
-  if (evt.target !== evt.path[4]) {
+  if (evt.target !== evt.target.parentElement.parentElement) {
     closePopUp(evt.target);
   }
 }
@@ -158,7 +157,7 @@ function closePopUpPhoto() {
 
 function openPopUpPhoto(evt) {
   if (evt.target.classList.contains('photos__image')) {
-    const figure = evt.path[1];
+    const figure = evt.target.parentElement;
     const img = figure.querySelector('.photos__image');
     const figcaption = figure.querySelector('.photos__figcaption');
     popUpPhotosImage.src = img.src;
