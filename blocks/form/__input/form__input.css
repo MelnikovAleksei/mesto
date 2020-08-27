@@ -21,3 +21,9 @@
     width: 190px;
   }
 }
+
+@media screen and (max-height: 450px) {
+  .form__input {
+    margin-top: 0;
+  }
+}
