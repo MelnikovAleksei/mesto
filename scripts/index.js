@@ -142,7 +142,6 @@ function openPopUpEdit() {
 
 function openPopUpAdd() {
   emptyInputValue(addForm);
-  openCheckValidity(addForm);
   openPopUp(popUpAdd);
 }
 
