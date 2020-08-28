@@ -86,8 +86,11 @@ function initializeProfileInfo() {
   inputProfileCaption.value = profileCaption.textContent;
 }
 
-function emptyInputValue(...inputs) {
-  inputs.forEach(elem => elem.value = '')
+function emptyInputValue(element) {
+  const inputs = Array.from(element.querySelectorAll('.form__input'));
+  inputs.forEach(elem => {
+    elem.value = '';
+  })
 }
 
 function addCard(evt) {
@@ -98,18 +101,34 @@ function addCard(evt) {
 }
 
 function eventHandler(evt) {
-  if (evt.target !== evt.target.parentElement.parentElement) {
+  if (evt.target.classList.contains('popup')) {
     closePopUp(evt.target);
   }
 }
 
+function removeInputListener(element) {
+  const formInputs = Array.from(element.querySelectorAll('.form__input'));
+  formInputs.forEach(element => {
+    element.removeEventListener('input', inputEventListener);
+  })
+}
+
+function addInputListener(element) {
+  const formInputs = Array.from(element.querySelectorAll('.form__input'));
+  formInputs.forEach(element => {
+    element.addEventListener('input', inputEventListener);
+  })
+}
+
 function openPopUp(element) {
+  addInputListener(element);
   element.classList.add('popup_opened');
   element.addEventListener('click', eventHandler);
   document.addEventListener('keydown', escKeyHandler);
 }
 
 function closePopUp(element) {
+  removeInputListener(element);
   element.classList.remove('popup_opened');
   element.removeEventListener('click', eventHandler);
   document.removeEventListener('keydown', escKeyHandler);
@@ -117,10 +136,13 @@ function closePopUp(element) {
 
 function openPopUpEdit() {
   initializeProfileInfo();
+  openCheckValidity(editForm);
   openPopUp(popUpEdit);
 }
 
 function openPopUpAdd() {
+  emptyInputValue(addForm);
+  openCheckValidity(addForm);
   openPopUp(popUpAdd);
 }
 
