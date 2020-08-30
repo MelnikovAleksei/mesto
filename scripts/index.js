@@ -27,6 +27,8 @@ const initialCards = [
 
 const popUpList = document.querySelectorAll('.popup');
 
+const openPopUpSelector = 'popup_opened';
+
 const popUpCloseButtonList = document.querySelectorAll('.popup__close-button');
 
 const popUpEdit = document.querySelector('.popup-edit');
@@ -58,6 +60,8 @@ const photosAddButton = profile.querySelector('.profile__add-button');
 const photos = document.querySelector('.photos');
 const photosList = photos.querySelector('.photos__list');
 
+const escKeyCode = 'Escape';
+
 const photosElement = document.querySelector('#photos-element').content;
 
 function addPhotosElement(name, link, where = 'append') {
@@ -66,7 +70,7 @@ function addPhotosElement(name, link, where = 'append') {
   const photosLikeButton = photosCard.querySelector('.photos__like-button');
   const photosDeleteButton = photosCard.querySelector('.photos__delete-button');
   photosCard.querySelector('.photos__image').src = link;
-  photosCard.querySelector('.photos__image').alt = 'фотография ' + name;
+  photosCard.querySelector('.photos__image').alt = `фотография ${name}`;
   photosCard.querySelector('.photos__figcaption').textContent = name;
   if (where === 'append') {
     photosList.append(photosCard);
@@ -189,12 +193,12 @@ function openPopUpPhoto(evt) {
 }
 
 function escKeyHandler(evt) {
-  if (evt.key === 'Escape') {
-    if (popUpAdd.classList.contains('popup_opened')) {
+  if (evt.key === escKeyCode) {
+    if (popUpAdd.classList.contains(openPopUpSelector)) {
       closePopUp(popUpAdd);
-    } else if (popUpEdit.classList.contains('popup_opened')) {
+    } else if (popUpEdit.classList.contains(openPopUpSelector)) {
       closePopUp(popUpEdit);
-    } else if (popUpPhotos.classList.contains('popup_opened')) {
+    } else if (popUpPhotos.classList.contains(openPopUpSelector)) {
       closePopUp(popUpPhotos);
     }
   }
