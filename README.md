@@ -6,7 +6,7 @@
 
 [Проектная работа на GitHub Pages](https://melnikovaleksei.github.io/mesto/index)
 
-### Эта проектная работа была создана в рамках прохождения четвертого спринтов курса "Веб-разработчик". В работе применены расширенные возможности HTML и CSS, JavaScript (работа с DOM), git
+### Эта проектная работа была создана в рамках прохождения четвертого спринтов курса "Веб-разработчик". В работе применены расширенные возможности HTML и CSS, JavaScript (работа с DOM), проверка данных форм, git
 
 ### Технологии в проектной работе:
 * Flexbox
@@ -16,7 +16,8 @@
 * BEM Methodology
 * File Structure and File Paths (Nested BEM)
 * Git
-* JavaScript (DOM)
+* JavaScript (DOM) 
+* Client-side form validation 
 
 ### Языки:
 * HTML
