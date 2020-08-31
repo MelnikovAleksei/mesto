@@ -6,7 +6,7 @@
 
 [Deploy on GitHub Pages](https://melnikovaleksei.github.io/mesto/index)
 
-### The work uses advanced HTML and CSS, JavaScript (DOM), git
+### The work uses advanced HTML and CSS, JavaScript (DOM), Client-side form validation, git
 
 ### Technologies:
 * Flexbox
@@ -17,6 +17,7 @@
 * File Structure and File Paths (Nested BEM)
 * Git
 * JavaScript (DOM)
+* Client-side form validation 
 
 ### Languages:
 * HTML
