@@ -50,18 +50,32 @@ function toggleSubmitButtonState(formInputs, formSubmitButton) {
   }
 }
 
+function inputEventListener(evt) {
+  const formElement = evt.target.form;
+  const inputElement = evt.srcElement;
+  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+  checkInputValidity(formElement, inputElement);
+  toggleSubmitButtonState(formInputs, formSubmitButton);
+}
+
+function openCheckValidity(formElement) {
+  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+  formInputs.forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement);
+  });
+  toggleSubmitButtonState(formInputs, formSubmitButton);
+};
+
 function setEventListeners(formElement) {
   const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
   const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
   toggleSubmitButtonState(formInputs, formSubmitButton);
   formInputs.forEach(inputElement => {
-    inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleSubmitButtonState(formInputs, formSubmitButton);
-    })
+    inputElement.addEventListener('input', inputEventListener);
   })
 }
-
 
 function enableValidation(settingsObject) {
   const formsList = Array.from(document.querySelectorAll(settingsObject.formSelector));

@@ -6,7 +6,7 @@
 
 [Проектная работа на GitHub Pages](https://melnikovaleksei.github.io/mesto/index)
 
-### Эта проектная работа была создана в рамках прохождения четвертого спринтов курса "Веб-разработчик". В работе применены расширенные возможности HTML и CSS, JavaScript (работа с DOM), git
+### Эта проектная работа была создана в рамках прохождения 4-6 спринтов курса "Веб-разработчик". В работе применены расширенные возможности HTML и CSS, JavaScript (работа с DOM), проверка данных форм, git
 
 ### Технологии в проектной работе:
 * Flexbox
@@ -16,15 +16,20 @@
 * BEM Methodology
 * File Structure and File Paths (Nested BEM)
 * Git
-* JavaScript (DOM)
+* JavaScript (DOM) 
+* Client-side form validation 
 
 ### Языки:
 * HTML
 * CSS
 * JavaScript
 
-#### Макет проектной работы спринта №4 в Figma:
-* [Mesto](https://drive.google.com/file/d/13X4b5SM0zAXjAl7buGuD5RcvNTK6XUhI/view?usp=sharing)
+#### Макеты проектной работы в Figma:
+* [Макет 4](https://www.figma.com/file/SLGf16iUspCIjC05qUi1dk/YP-project-4-mesto) 
+* [Макет 5](https://www.figma.com/file/n0Ho0JWLOCYiVkrboLTVJo/sprint-5-mesto) 
+* [Макет 6](https://www.figma.com/file/qk3Axq4MZryPzGFfCnUnrP/sprint-6-mesto) 
 
-#### Чеклист проектной работы спринта №4:
-* [Чеклист](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html)
+#### Чеклисты проектных работ:
+* [Чеклист 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html) 
+* [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html) 
+* [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html) 

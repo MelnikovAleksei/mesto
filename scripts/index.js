@@ -27,6 +27,8 @@ const initialCards = [
 
 const popUpList = document.querySelectorAll('.popup');
 
+const openPopUpSelector = 'popup_opened';
+
 const popUpCloseButtonList = document.querySelectorAll('.popup__close-button');
 
 const popUpEdit = document.querySelector('.popup-edit');
@@ -58,6 +60,8 @@ const photosAddButton = profile.querySelector('.profile__add-button');
 const photos = document.querySelector('.photos');
 const photosList = photos.querySelector('.photos__list');
 
+const escKeyCode = 'Escape';
+
 const photosElement = document.querySelector('#photos-element').content;
 
 function addPhotosElement(name, link, where = 'append') {
@@ -66,7 +70,7 @@ function addPhotosElement(name, link, where = 'append') {
   const photosLikeButton = photosCard.querySelector('.photos__like-button');
   const photosDeleteButton = photosCard.querySelector('.photos__delete-button');
   photosCard.querySelector('.photos__image').src = link;
-  photosCard.querySelector('.photos__image').alt = 'фотография ' + name;
+  photosCard.querySelector('.photos__image').alt = `фотография ${name}`;
   photosCard.querySelector('.photos__figcaption').textContent = name;
   if (where === 'append') {
     photosList.append(photosCard);
@@ -86,8 +90,11 @@ function initializeProfileInfo() {
   inputProfileCaption.value = profileCaption.textContent;
 }
 
-function emptyInputValue(...inputs) {
-  inputs.forEach(elem => elem.value = '')
+function emptyInputValue(element) {
+  const inputs = Array.from(element.querySelectorAll('.form__input'));
+  inputs.forEach(elem => {
+    elem.value = '';
+  })
 }
 
 function addCard(evt) {
@@ -98,18 +105,34 @@ function addCard(evt) {
 }
 
 function eventHandler(evt) {
-  if (evt.target !== evt.target.parentElement.parentElement) {
+  if (evt.target.classList.contains('popup')) {
     closePopUp(evt.target);
   }
 }
 
+function removeInputListener(element) {
+  const formInputs = Array.from(element.querySelectorAll('.form__input'));
+  formInputs.forEach(element => {
+    element.removeEventListener('input', inputEventListener);
+  })
+}
+
+function addInputListener(element) {
+  const formInputs = Array.from(element.querySelectorAll('.form__input'));
+  formInputs.forEach(element => {
+    element.addEventListener('input', inputEventListener);
+  })
+}
+
 function openPopUp(element) {
+  addInputListener(element);
   element.classList.add('popup_opened');
   element.addEventListener('click', eventHandler);
   document.addEventListener('keydown', escKeyHandler);
 }
 
 function closePopUp(element) {
+  removeInputListener(element);
   element.classList.remove('popup_opened');
   element.removeEventListener('click', eventHandler);
   document.removeEventListener('keydown', escKeyHandler);
@@ -117,10 +140,13 @@ function closePopUp(element) {
 
 function openPopUpEdit() {
   initializeProfileInfo();
+  openCheckValidity(editForm);
   openPopUp(popUpEdit);
 }
 
 function openPopUpAdd() {
+  emptyInputValue(addForm);
+  openCheckValidity(addForm);
   openPopUp(popUpAdd);
 }
 
@@ -167,12 +193,12 @@ function openPopUpPhoto(evt) {
 }
 
 function escKeyHandler(evt) {
-  if (evt.key === 'Escape') {
-    if (popUpAdd.classList.contains('popup_opened')) {
+  if (evt.key === escKeyCode) {
+    if (popUpAdd.classList.contains(openPopUpSelector)) {
       closePopUp(popUpAdd);
-    } else if (popUpEdit.classList.contains('popup_opened')) {
+    } else if (popUpEdit.classList.contains(openPopUpSelector)) {
       closePopUp(popUpEdit);
-    } else if (popUpPhotos.classList.contains('popup_opened')) {
+    } else if (popUpPhotos.classList.contains(openPopUpSelector)) {
       closePopUp(popUpPhotos);
     }
   }
