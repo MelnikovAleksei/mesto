@@ -1,6 +1,13 @@
 import {Card} from './Card.js';
 
-const initialCards = [
+const photoCardSettings = {
+  templateSelector: '#photos-element',
+  photoCardSelector: '.photos__card',
+  photoImageSelector: '.photos__image',
+  photoFigcaptionSelector: '.photos__figcaption',
+}
+
+const initialCardsData = [
   {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -27,10 +34,22 @@ const initialCards = [
   }
 ];
 
+const photosListElement = document.querySelector('.photos__list');
 
+const renderCards = (cardsData) => {
+  cardsData.forEach(elem => {
+    const card = new Card(elem, photoCardSettings);
+    const cardElement = card.generateCard();
+    photosListElement.append(cardElement);
+  })
+}
 
-(function () {
-  const popUpList = document.querySelectorAll('.popup');
+renderCards(initialCardsData)
+
+// =========================================================
+function func () {
+
+const popUpList = document.querySelectorAll('.popup');
 
 const openPopUpSelector = 'popup_opened';
 
@@ -233,4 +252,4 @@ addForm.addEventListener('submit', addCard);
 
 initializePhotos(initialCards);
 
-})
+}
