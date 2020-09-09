@@ -24,8 +24,8 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-const popUpList = document.querySelectorAll('.popup');
+(function () {
+  const popUpList = document.querySelectorAll('.popup');
 
 const openPopUpSelector = 'popup_opened';
 
@@ -227,3 +227,5 @@ popUpCloseButtonList.forEach(popUpCloseButton => {
 addForm.addEventListener('submit', addCard);
 
 initializePhotos(initialCards);
+
+})
