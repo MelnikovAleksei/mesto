@@ -6,6 +6,7 @@ class Card {
     this._photoCardSelector = settings.photoCardSelector;
     this._photoImageSelector = settings.photoImageSelector;
     this._photoFigcaptionSelector = settings.photoFigcaptionSelector;
+    this._photoLikeButtonSelector = settings.photoLikeButtonSelector;
   }
 
   _getTemplate() {
@@ -13,15 +14,16 @@ class Card {
   }
 
   _like() {
-
+    this.classList.toggle('photos__like-button_liked');
   }
 
   _setEventListeners() {
-
+    this._cardElement.querySelector(this._photoLikeButtonSelector).addEventListener('click', this._like);
   }
 
   generateCard() {
     this._cardElement = this._getTemplate();
+    this._setEventListeners();
     this._cardElement.querySelector(this._photoImageSelector).src = this._link;
     this._cardElement.querySelector(this._photoFigcaptionSelector).textContent = this._name;
     return this._cardElement;

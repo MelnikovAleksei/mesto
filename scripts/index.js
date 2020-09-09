@@ -5,6 +5,7 @@ const photoCardSettings = {
   photoCardSelector: '.photos__card',
   photoImageSelector: '.photos__image',
   photoFigcaptionSelector: '.photos__figcaption',
+  photoLikeButtonSelector: '.photos__like-button',
 }
 
 const initialCardsData = [
