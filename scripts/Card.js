@@ -12,7 +12,7 @@ class Card {
 
   }
 
-  render() {
+  generateCard() {
 
   }
 }
