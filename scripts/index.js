@@ -50,8 +50,6 @@ const renderCards = (cardsData) => {
   })
 }
 
-
-
 renderCards(initialCardsData)
 
 // =========================================================
