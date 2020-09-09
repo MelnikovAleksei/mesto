@@ -36,7 +36,11 @@ const initialCardsData = [
   }
 ];
 
+// elements
 const photosListElement = document.querySelector('.photos__list');
+
+// classes
+const popupOpenedClass = 'popup_opened';
 
 const renderCards = (cardsData) => {
   cardsData.forEach(elem => {
@@ -45,6 +49,8 @@ const renderCards = (cardsData) => {
     photosListElement.append(cardElement);
   })
 }
+
+
 
 renderCards(initialCardsData)
 
