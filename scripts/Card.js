@@ -7,6 +7,7 @@ class Card {
     this._photoImageSelector = settings.photoImageSelector;
     this._photoFigcaptionSelector = settings.photoFigcaptionSelector;
     this._photoLikeButtonSelector = settings.photoLikeButtonSelector;
+    this._photoDeleteButtonSelector = settings.photoDeleteButtonSelector;
   }
 
   _getTemplate() {
@@ -17,8 +18,14 @@ class Card {
     this.classList.toggle('photos__like-button_liked');
   }
 
+  _delete() {
+    this.removeEventListener('click', this._delete);
+    this.closest('.photos__card').remove();
+  }
+
   _setEventListeners() {
     this._cardElement.querySelector(this._photoLikeButtonSelector).addEventListener('click', this._like);
+    this._cardElement.querySelector(this._photoDeleteButtonSelector).addEventListener('click', this._delete);
   }
 
   generateCard() {
