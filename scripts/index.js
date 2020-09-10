@@ -7,6 +7,9 @@ const photoCardSettings = {
   photoFigcaptionSelector: '.photos__figcaption',
   photoLikeButtonSelector: '.photos__like-button',
   photoDeleteButtonSelector: '.photos__delete-button',
+  photoImageClass: 'photos__image',
+  photoLikeButtonClass: 'photos__like-button',
+  photoDeleteButtonClass: 'photos__delete-button',
 }
 
 const initialCardsData = [
@@ -36,7 +39,7 @@ const initialCardsData = [
   }
 ];
 
-const newCarData =  {
+const newCardData =  {
   name: 'Архыз',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
 }
@@ -58,7 +61,7 @@ const addCard = (templateSelector, cardData, cardsSettings) => {
 }
 
 initCards(photoTemplateSelector, initialCardsData, photoCardSettings)
-addCard(photoTemplateSelector, newCarData, photoCardSettings)
+addCard(photoTemplateSelector, newCardData, photoCardSettings)
 // =========================================================
 function func () {
 

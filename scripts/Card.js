@@ -10,12 +10,12 @@ class Card {
       .querySelector(cardsSettings.photoCardSelector)
   }
 
-  _like() {
-    this.classList.toggle('photos__like-button_liked');
+  _like(evt) {
+    evt.target.classList.toggle('photos__like-button_liked');
   }
 
-  _delete() {
-    this.closest('.photos__card').remove();
+  _delete(evt) {
+    evt.target.closest('.photos__card').remove();
   }
 
   _closePopup() {
@@ -27,8 +27,8 @@ class Card {
     popupPhotos.classList.remove('popup_opened');
   }
 
-  _openPopup() {
-    const figureElement = this.parentElement;
+  _openPopup(evt) {
+    const figureElement = evt.target.parentElement;
     const imageElement = figureElement.querySelector('.photos__image');
     const figcaptionElement = figureElement.querySelector('.photos__figcaption');
     const popupPhotos = document.querySelector('.popup-photos');
@@ -39,7 +39,16 @@ class Card {
     popupPhotos.classList.add('popup_opened');
   }
 
-  _setEventListeners() {
+  _setEventListeners(cardsList, cardsSettings) {
+    cardsList.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains(cardsSettings.photoImageClass)) {
+        this._openPopup(evt);
+      } else if (evt.target.classList.contains(cardsSettings.photoLikeButtonClass)) {
+        this._like(evt)
+      } else if (evt.target.classList.contains(cardsSettings.photoDeleteButtonClass)) {
+        this._delete(evt)
+      }
+    })/*
     this._cardElement.querySelector(this._cardsSettings.photoLikeButtonSelector).addEventListener('click', this._like);
     this._cardElement.querySelector(this._cardsSettings.photoDeleteButtonSelector).addEventListener('click', this._delete);
     this._cardElement.querySelector(this._cardsSettings.photoImageSelector).addEventListener('click', this._openPopup);
@@ -53,7 +62,7 @@ class Card {
       if (evt.key === 'Escape') {
         this._closePopup();
       }
-    })
+    })*/
   }
 
   generateCard(cardData, cardsSettings) {
@@ -72,6 +81,7 @@ class Card {
       card.querySelector(cardsSettings.photoFigcaptionSelector).textContent = element.name;
       cardsList.append(card);
     })
+    this._setEventListeners(cardsList, cardsSettings)
   }
 }
 
