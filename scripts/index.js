@@ -45,23 +45,22 @@ const newCardData =  {
 }
 
 // elements
-
+const photoList = document.querySelector(photoCardSettings.photoListSelector)
 // classes
 const photoTemplateSelector = '#photos-element';
-const popupOpenedClass = 'popup_opened';
 
 const initCards = (templateSelector, cardsData, cardsSettings) => {
   const card = new Card(templateSelector);
   card.initialize(cardsData, cardsSettings);
 }
 
-const addCard = (templateSelector, cardData, cardsSettings) => {
+const addCard = (templateSelector, cardData, cardsSettings, parentPhotoList) => {
   const card = new Card(templateSelector);
-  card.generateCard(cardData, cardsSettings);
+  card.generateCard(cardData, cardsSettings, parentPhotoList);
 }
 
 initCards(photoTemplateSelector, initialCardsData, photoCardSettings)
-addCard(photoTemplateSelector, newCardData, photoCardSettings)
+addCard(photoTemplateSelector, newCardData, photoCardSettings, photoList)
 // =========================================================
 function func () {
 
