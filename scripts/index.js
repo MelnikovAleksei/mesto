@@ -45,9 +45,25 @@ const newCardData =  {
 }
 
 // elements
-const photoList = document.querySelector(photoCardSettings.photoListSelector)
-// classes
+const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
+
+const profileSectionElement = document.querySelector('.profile');
+const addCardButtonElement = profileSectionElement.querySelector('.profile__add-button');
+
+const popupAddElement = document.querySelector('.popup-add');
+const popupEditProfileElement = document.querySelector('.popup-edit');
+// selectors
 const photoTemplateSelector = '#photos-element';
+// classes
+const addCardButtonClass = 'profile__add-button';
+const editProfileButtonClass = 'profile__edit-button';
+const popupOpenedClass = 'popup_opened';
+const popupAddClass = 'popup-add';
+const popupEditClass = 'popup-edit';
+const popupEditCloseButtonClass = 'popup-edit__close-button';
+const popupAddCloseButtonClass = 'popup-add__close-button';
+
+const escapeKey = 'Escape';
 
 const initCards = (templateSelector, cardsData, cardsSettings) => {
   const card = new Card(templateSelector);
@@ -59,8 +75,41 @@ const addCard = (templateSelector, cardData, cardsSettings, parentPhotoList) => 
   card.generateCard(cardData, cardsSettings, parentPhotoList);
 }
 
-initCards(photoTemplateSelector, initialCardsData, photoCardSettings)
-addCard(photoTemplateSelector, newCardData, photoCardSettings, photoList)
+initCards(photoTemplateSelector, initialCardsData, photoCardSettings);
+addCard(photoTemplateSelector, newCardData, photoCardSettings, photoListElement);
+
+const openPopup = (element) => {
+  element.classList.add(popupOpenedClass);
+}
+
+const closePopup = (element) => {
+  element.classList.remove(popupOpenedClass);
+}
+
+const setProfileSectionEventListeners = (element) => {
+  element.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains(addCardButtonClass)) {
+      openPopup(popupAddElement);
+    } else if (evt.target.classList.contains(editProfileButtonClass)) {
+      openPopup(popupEditProfileElement);
+    }
+  })
+}
+const setPopupEventListeners = (element, popupClass, buttonClass) => {
+  element.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains(buttonClass) || evt.target.classList.contains(popupClass)) {
+      closePopup(element);
+    }
+    document.addEventListener('keydown', (evt) => {
+      if (element.classList.contains(popupOpenedClass) && evt.key === escapeKey) {
+        closePopup(element);
+      }
+    })
+  })
+}
+setProfileSectionEventListeners(profileSectionElement);
+setPopupEventListeners(popupAddElement, popupAddClass, popupAddCloseButtonClass);
+setPopupEventListeners(popupEditProfileElement, popupEditClass, popupEditCloseButtonClass);
 // =========================================================
 function func () {
 
