@@ -1,5 +1,6 @@
 class Card {
-  constructor(templateSelector) {
+  constructor(cardData, templateSelector) {
+    this._cardData = cardData;
     this._templateSelector = templateSelector;
   }
 
@@ -61,10 +62,10 @@ class Card {
     })
   }
 
-  generateCard(cardData, cardsSettings, parentPhotoList) {
+  generateCard(cardsSettings, parentPhotoList) {
     this._cardElement = this._getPhotoElement(cardsSettings).cloneNode(true);
-    this._cardElement.querySelector(cardsSettings.photoImageSelector).src = cardData.link;
-    this._cardElement.querySelector(cardsSettings.photoFigcaptionSelector).textContent = cardData.name;
+    this._cardElement.querySelector(cardsSettings.photoImageSelector).src = this._cardData.link;
+    this._cardElement.querySelector(cardsSettings.photoFigcaptionSelector).textContent = this._cardData.name;
     parentPhotoList.prepend(this._cardElement);
   }
   

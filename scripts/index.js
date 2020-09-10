@@ -66,13 +66,13 @@ const popupAddCloseButtonClass = 'popup-add__close-button';
 const escapeKey = 'Escape';
 
 const initCards = (templateSelector, cardsData, cardsSettings) => {
-  const card = new Card(templateSelector);
+  const card = new Card(cardsData, templateSelector);
   card.initialize(cardsData, cardsSettings);
 }
 
 const addCard = (templateSelector, cardData, cardsSettings, parentPhotoList) => {
-  const card = new Card(templateSelector);
-  card.generateCard(cardData, cardsSettings, parentPhotoList);
+  const card = new Card(cardData, templateSelector);
+  card.generateCard(cardsSettings, parentPhotoList);
 }
 
 initCards(photoTemplateSelector, initialCardsData, photoCardSettings);
