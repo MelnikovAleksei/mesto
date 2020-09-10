@@ -1,7 +1,7 @@
 import {Card} from './Card.js';
 
 const photoCardSettings = {
-  templateSelector: '#photos-element',
+  photoListSelector: '.photos__list',
   photoCardSelector: '.photos__card',
   photoImageSelector: '.photos__image',
   photoFigcaptionSelector: '.photos__figcaption',
@@ -36,22 +36,29 @@ const initialCardsData = [
   }
 ];
 
-// elements
-const photosListElement = document.querySelector('.photos__list');
-
-// classes
-const popupOpenedClass = 'popup_opened';
-
-const renderCards = (cardsData) => {
-  cardsData.forEach(elem => {
-    const card = new Card(elem, photoCardSettings);
-    const cardElement = card.generateCard();
-    photosListElement.append(cardElement);
-  })
+const newCarData =  {
+  name: 'Архыз',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
 }
 
-renderCards(initialCardsData)
+// elements
 
+// classes
+const photoTemplateSelector = '#photos-element';
+const popupOpenedClass = 'popup_opened';
+
+const initCards = (templateSelector, cardsData, cardsSettings) => {
+  const card = new Card(templateSelector);
+  card.initialize(cardsData, cardsSettings);
+}
+
+const addCard = (templateSelector, cardData, cardsSettings) => {
+  const card = new Card(templateSelector);
+  card.generateCard(cardData, cardsSettings);
+}
+
+initCards(photoTemplateSelector, initialCardsData, photoCardSettings)
+addCard(photoTemplateSelector, newCarData, photoCardSettings)
 // =========================================================
 function func () {
 
