@@ -18,8 +18,7 @@ class Card {
     evt.target.closest('.photos__card').remove();
   }
 
-  _closePopup() {
-    const popupPhotos = document.querySelector('.popup-photos');
+  _closePopup(popupPhotos) {
     const popupImage = popupPhotos.querySelector('.popup-photos__image');
     const popupFigcaption = popupPhotos.querySelector('.popup-photos__figcaption');
     popupImage.src = '';
@@ -48,7 +47,19 @@ class Card {
       } else if (evt.target.classList.contains(cardsSettings.photoDeleteButtonClass)) {
         this._delete(evt)
       }
-    })/*
+    })
+    const popupPhotos = document.querySelector('.popup-photos');
+    popupPhotos.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup-photos') || evt.target.classList.contains('popup-photos__close-button')) {
+        this._closePopup(popupPhotos);
+      }
+    });
+    document.addEventListener('keydown', (evt) => {
+      if (popupPhotos.classList.contains('popup_opened') && evt.key === 'Escape') {
+        this._closePopup(popupPhotos);
+      }
+    })
+    /*
     this._cardElement.querySelector(this._cardsSettings.photoLikeButtonSelector).addEventListener('click', this._like);
     this._cardElement.querySelector(this._cardsSettings.photoDeleteButtonSelector).addEventListener('click', this._delete);
     this._cardElement.querySelector(this._cardsSettings.photoImageSelector).addEventListener('click', this._openPopup);
