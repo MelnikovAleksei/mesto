@@ -89,48 +89,27 @@ const openPopup = (popupElement) => {
 const closePopup = (popupElement) => {
   popupElement.classList.remove(popupOpenedClass);
 }
-/*
-const setProfileSectionEventListeners = (element) => {
-  element.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains(addCardButtonClass)) {
-      openPopup(popupAddElement);
-    } else if (evt.target.classList.contains(editProfileButtonClass)) {
-      openPopup(popupEditProfileElement);
-    }
-  })
-}
-*/
-const setPopupEventListeners = (element, popupElement, popupClass, openingPointClass, closeButtonClass) => {
+
+const setPopupEventListeners = (element, popupElement, popupClass, openingPointClass, closeButtonClass, popupOpenedClass) => {
   element.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(openingPointClass)) {
       openPopup(popupElement);
-    } 
-    
+    }
+
   })
   popupElement.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains(closeButtonClass)) {
+    if (evt.target.classList.contains(closeButtonClass) || evt.target.classList.contains(popupClass)) {
       closePopup(popupElement);
     }
   })
-  /*
-  element.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains(closeButtonClass) || evt.target.classList.contains(popupClass)) {
-      closePopup(element);
+  document.addEventListener('keydown', (evt) => {
+    if (popupElement.classList.contains(popupOpenedClass) && evt.key === escapeKey) {
+      closePopup(popupElement);
     }
-    document.addEventListener('keydown', (evt) => {
-      if (element.classList.contains(popupOpenedClass) && evt.key === escapeKey) {
-        closePopup(element);
-      }
-    })
   })
-  */
 }
-setPopupEventListeners(profileSectionElement, popupEditProfileElement, popupEditClass, editProfileButtonClass, popupEditCloseButtonClass)
-/*
-setProfileSectionEventListeners(profileSectionElement);
-setPopupEventListeners(popupAddElement, popupAddClass, popupAddCloseButtonClass);
-setPopupEventListeners(popupEditProfileElement, popupEditClass, popupEditCloseButtonClass);
-*/
+setPopupEventListeners(profileSectionElement, popupEditProfileElement, popupEditClass, editProfileButtonClass, popupEditCloseButtonClass, popupOpenedClass);
+setPopupEventListeners(profileSectionElement, popupAddElement, popupAddClass, addCardButtonClass, popupAddCloseButtonClass, popupOpenedClass);
 // =========================================================
 function func () {
 
