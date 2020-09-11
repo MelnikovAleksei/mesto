@@ -71,8 +71,13 @@ const popupAddElement = document.querySelector('.popup-add');
 const popupEditProfileElement = document.querySelector('.popup-edit');
 const popupPhotoElement = document.querySelector('.popup-photo');
 
+const infoFormElement = document.forms.info;
+const addFormElement = document.forms.photo;
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
+
+const profileName = profileSectionElement.querySelector(profileNameSelector);
+const profileCaption = profileSectionElement.querySelector(profileCaptionSelector);
 
 const escapeKey = 'Escape';
 
@@ -90,14 +95,12 @@ initCards(photoTemplateSelector, initialCardsData, photoCardSettings);
 addCard(photoTemplateSelector, newCardData, photoCardSettings, photoListElement);
 
 const initializeProfileInfo = (element) => {
-  const profileName = element.querySelector(profileNameSelector);
-  const profileCaption = element.querySelector(profileCaptionSelector);
   inputProfileNameElement.value = profileName.textContent;
   inputProfileCaptionElement.value = profileCaption.textContent;
 }
 
-const clearInputValue = (element) => {
-  const inputs = Array.from(element.querySelectorAll(formInputSelector));
+const clearInputValue = (popupElement) => {
+  const inputs = Array.from(popupElement.querySelectorAll(formInputSelector));
   inputs.forEach(element => {
     element.value = '';
   })
@@ -110,7 +113,7 @@ const openPopup = (element, popupElement) => {
   popupElement.classList.add(popupOpenedClass);
 }
 
-const closePopup = (element, popupElement) => {
+const closePopup = (popupElement) => {
   clearInputValue(popupElement);
   popupElement.classList.remove(popupOpenedClass);
 }
@@ -123,17 +126,52 @@ const setPopupEventListeners = (element, popupElement, popupClass, openingPointC
   })
   popupElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(closeButtonClass) || evt.target.classList.contains(popupClass)) {
-      closePopup(element, popupElement);
+      closePopup(popupElement);
     }
   })
   document.addEventListener('keydown', (evt) => {
     if (popupElement.classList.contains(popupOpenedClass) && evt.key === closeKey) {
-      closePopup(element, popupElement);
+      closePopup(popupElement);
     }
   })
 }
+
+const getNewCardData = (popupAddElement) => {
+  const inputs = Array.from(popupAddElement.querySelectorAll(formInputSelector));
+  const newCardData = {
+    name: inputs[0].value,
+    link: inputs[1].value,
+  }
+  console.log(newCardData)
+  return newCardData;
+}
+
+const infoFormEventHandler = () => {
+  profileName.textContent = inputProfileNameElement.value;
+  profileCaption.textContent = inputProfileCaptionElement.value;
+  closePopup(popupEditProfileElement);
+}
+
+const addFormEventHandler = () => {
+  const newCardData = getNewCardData(popupAddElement);
+  addCard(photoTemplateSelector, newCardData, photoCardSettings, photoListElement);
+  closePopup(popupAddElement);
+}
+
+const setFormsEventListeners = () => {
+  addFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    addFormEventHandler();
+  })
+  infoFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    infoFormEventHandler();
+  });
+}
+
 setPopupEventListeners(profileSectionElement, popupEditProfileElement, popupEditClass, editProfileButtonClass, popupEditCloseButtonClass, popupOpenedClass, escapeKey);
 setPopupEventListeners(profileSectionElement, popupAddElement, popupAddClass, addCardButtonClass, popupAddCloseButtonClass, popupOpenedClass, escapeKey);
+setFormsEventListeners();
 // =========================================================
 function func () {
 
