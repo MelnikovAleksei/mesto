@@ -62,11 +62,11 @@ class Card {
     })
   }
 
-  generateCard(cardsSettings, parentPhotoList) {
+  generateCard(cardsSettings, container) {
     this._cardElement = this._getPhotoElement(cardsSettings).cloneNode(true);
     this._cardElement.querySelector(cardsSettings.photoImageSelector).src = this._cardData.link;
     this._cardElement.querySelector(cardsSettings.photoFigcaptionSelector).textContent = this._cardData.name;
-    parentPhotoList.prepend(this._cardElement);
+    container.prepend(this._cardElement);
   }
 
   initialize(cardsData, cardsSettings) {

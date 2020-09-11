@@ -48,6 +48,7 @@ const newCardData =  {
 const photoTemplateSelector = '#photos-element';
 const profileNameSelector = '.profile__name';
 const profileCaptionSelector = '.profile__caption';
+const formInputSelector = '.form__input';
 // classes
 const addCardButtonClass = 'profile__add-button';
 const editProfileButtonClass = 'profile__edit-button';
@@ -80,9 +81,9 @@ const initCards = (templateSelector, cardsData, cardsSettings) => {
   card.initialize(cardsData, cardsSettings);
 }
 
-const addCard = (templateSelector, cardData, cardsSettings, parentPhotoList) => {
+const addCard = (templateSelector, cardData, cardsSettings, container) => {
   const card = new Card(cardData, templateSelector);
-  card.generateCard(cardsSettings, parentPhotoList);
+  card.generateCard(cardsSettings, container);
 }
 
 initCards(photoTemplateSelector, initialCardsData, photoCardSettings);
@@ -95,11 +96,11 @@ const initializeProfileInfo = (element) => {
   inputProfileCaptionElement.value = profileCaption.textContent;
 }
 
-const clearProfileInfo = (element) => {
-  const profileName = element.querySelector(profileNameSelector);
-  const profileCaption = element.querySelector(profileCaptionSelector);
-  inputProfileNameElement.value = '';
-  inputProfileCaptionElement.value = '';
+const clearInputValue = (element) => {
+  const inputs = Array.from(element.querySelectorAll(formInputSelector));
+  inputs.forEach(element => {
+    element.value = '';
+  })
 }
 
 const openPopup = (element, popupElement) => {
@@ -110,14 +111,11 @@ const openPopup = (element, popupElement) => {
 }
 
 const closePopup = (element, popupElement) => {
-  if (popupElement.classList.contains(popupEditClass)) {
-    clearProfileInfo(element);
-  }
+  clearInputValue(popupElement);
   popupElement.classList.remove(popupOpenedClass);
 }
 
 const setPopupEventListeners = (element, popupElement, popupClass, openingPointClass, closeButtonClass, popupOpenedClass, closeKey) => {
-
   element.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(openingPointClass)) {
       openPopup(element, popupElement);
