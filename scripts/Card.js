@@ -68,7 +68,7 @@ class Card {
     this._cardElement.querySelector(cardsSettings.photoFigcaptionSelector).textContent = this._cardData.name;
     parentPhotoList.prepend(this._cardElement);
   }
-  
+
   initialize(cardsData, cardsSettings) {
     const cardsList = document.querySelector(cardsSettings.photoListSelector);
     const cardElement = this._getPhotoElement(cardsSettings);

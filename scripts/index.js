@@ -90,7 +90,7 @@ const closePopup = (popupElement) => {
   popupElement.classList.remove(popupOpenedClass);
 }
 
-const setPopupEventListeners = (element, popupElement, popupClass, openingPointClass, closeButtonClass, popupOpenedClass) => {
+const setPopupEventListeners = (element, popupElement, popupClass, openingPointClass, closeButtonClass, popupOpenedClass, closeKey) => {
   element.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(openingPointClass)) {
       openPopup(popupElement);
@@ -103,13 +103,13 @@ const setPopupEventListeners = (element, popupElement, popupClass, openingPointC
     }
   })
   document.addEventListener('keydown', (evt) => {
-    if (popupElement.classList.contains(popupOpenedClass) && evt.key === escapeKey) {
+    if (popupElement.classList.contains(popupOpenedClass) && evt.key === closeKey) {
       closePopup(popupElement);
     }
   })
 }
-setPopupEventListeners(profileSectionElement, popupEditProfileElement, popupEditClass, editProfileButtonClass, popupEditCloseButtonClass, popupOpenedClass);
-setPopupEventListeners(profileSectionElement, popupAddElement, popupAddClass, addCardButtonClass, popupAddCloseButtonClass, popupOpenedClass);
+setPopupEventListeners(profileSectionElement, popupEditProfileElement, popupEditClass, editProfileButtonClass, popupEditCloseButtonClass, popupOpenedClass, escapeKey);
+setPopupEventListeners(profileSectionElement, popupAddElement, popupAddClass, addCardButtonClass, popupAddCloseButtonClass, popupOpenedClass, escapeKey);
 // =========================================================
 function func () {
 
