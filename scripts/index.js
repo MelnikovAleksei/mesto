@@ -44,17 +44,10 @@ const newCardData =  {
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
 }
 
-// elements
-const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
-
-const profileSectionElement = document.querySelector('.profile');
-const addCardButtonElement = profileSectionElement.querySelector('.profile__add-button');
-
-const popupAddElement = document.querySelector('.popup-add');
-const popupEditProfileElement = document.querySelector('.popup-edit');
-const popupPhotoElement = document.querySelector('.popup-photo');
 // selectors
 const photoTemplateSelector = '#photos-element';
+const profileNameSelector = '.profile__name';
+const profileCaptionSelector = '.profile__caption';
 // classes
 const addCardButtonClass = 'profile__add-button';
 const editProfileButtonClass = 'profile__edit-button';
@@ -66,6 +59,19 @@ const popupPhotoClass = 'popup-photos';
 const popupPhotoCloseButtonClass = 'popup-photos__close-button';
 const popupEditCloseButtonClass = 'popup-edit__close-button';
 const popupAddCloseButtonClass = 'popup-add__close-button';
+
+// elements
+const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
+
+const profileSectionElement = document.querySelector('.profile');
+const addCardButtonElement = profileSectionElement.querySelector('.profile__add-button');
+
+const popupAddElement = document.querySelector('.popup-add');
+const popupEditProfileElement = document.querySelector('.popup-edit');
+const popupPhotoElement = document.querySelector('.popup-photo');
+
+const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
+const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
 const escapeKey = 'Escape';
 
@@ -82,24 +88,44 @@ const addCard = (templateSelector, cardData, cardsSettings, parentPhotoList) => 
 initCards(photoTemplateSelector, initialCardsData, photoCardSettings);
 addCard(photoTemplateSelector, newCardData, photoCardSettings, photoListElement);
 
-const openPopup = (popupElement) => {
+const initializeProfileInfo = (element) => {
+  const profileName = element.querySelector(profileNameSelector);
+  const profileCaption = element.querySelector(profileCaptionSelector);
+  inputProfileNameElement.value = profileName.textContent;
+  inputProfileCaptionElement.value = profileCaption.textContent;
+}
+
+const clearProfileInfo = (element) => {
+  const profileName = element.querySelector(profileNameSelector);
+  const profileCaption = element.querySelector(profileCaptionSelector);
+  inputProfileNameElement.value = '';
+  inputProfileCaptionElement.value = '';
+}
+
+const openPopup = (element, popupElement) => {
+  if (popupElement.classList.contains(popupEditClass)) {
+    initializeProfileInfo(element);
+  }
   popupElement.classList.add(popupOpenedClass);
 }
 
-const closePopup = (popupElement) => {
+const closePopup = (element, popupElement) => {
+  if (popupElement.classList.contains(popupEditClass)) {
+    clearProfileInfo(element);
+  }
   popupElement.classList.remove(popupOpenedClass);
 }
 
 const setPopupEventListeners = (element, popupElement, popupClass, openingPointClass, closeButtonClass, popupOpenedClass, closeKey) => {
+
   element.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(openingPointClass)) {
-      openPopup(popupElement);
+      openPopup(element, popupElement);
     }
-
   })
   popupElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(closeButtonClass) || evt.target.classList.contains(popupClass)) {
-      closePopup(popupElement);
+      closePopup(element, popupElement);
     }
   })
   document.addEventListener('keydown', (evt) => {
