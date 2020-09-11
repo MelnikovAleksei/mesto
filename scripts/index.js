@@ -130,7 +130,7 @@ const setPopupEventListeners = (element, popupElement, popupClass, openingPointC
   })
   document.addEventListener('keydown', (evt) => {
     if (popupElement.classList.contains(popupOpenedClass) && evt.key === closeKey) {
-      closePopup(popupElement);
+      closePopup(element, popupElement);
     }
   })
 }
