@@ -83,6 +83,26 @@ const profileCaption = profileSectionElement.querySelector(profileCaptionSelecto
 
 const escapeKey = 'Escape';
 
+const popupAddEventListenersSettings = {
+  element: profileSectionElement,
+  popupElement: popupAddElement,
+  popupClass: popupAddClass,
+  openingPointClass: addCardButtonClass,
+  closeButtonClass: popupAddCloseButtonClass,
+  popupOpenedClass: popupOpenedClass,
+  closeKey: escapeKey,
+}
+
+const popupEditEventListenersSettings = {
+  element: profileSectionElement,
+  popupElement: popupEditProfileElement,
+  popupClass: popupEditClass,
+  openingPointClass: editProfileButtonClass,
+  closeButtonClass: popupEditCloseButtonClass,
+  popupOpenedClass: popupOpenedClass,
+  closeKey: escapeKey,
+}
+
 const initCards = (templateSelector, cardsData, cardsSettings) => {
   const card = new Card(cardsData, templateSelector);
   card.initialize(cardsData, cardsSettings);
@@ -120,25 +140,25 @@ const closePopup = (popupElement) => {
   popupElement.classList.remove(popupOpenedClass);
 }
 
-const setPopupEventListeners = (element, popupElement, popupClass, openingPointClass, closeButtonClass, popupOpenedClass, closeKey) => {
-  element.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains(openingPointClass)) {
-      openPopup(element, popupElement);
+const setPopupEventListeners = (settings) => {
+  settings.element.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains(settings.openingPointClass)) {
+      openPopup(settings.element, settings.popupElement);
     }
   })
-  popupElement.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains(closeButtonClass) || evt.target.classList.contains(popupClass)) {
-      closePopup(popupElement);
+  settings.popupElement.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains(settings.closeButtonClass) || evt.target.classList.contains(settings.popupClass)) {
+      closePopup(settings.popupElement);
     }
   })
   document.addEventListener('keydown', (evt) => {
-    if (popupElement.classList.contains(popupOpenedClass) && evt.key === closeKey) {
-      closePopup(popupElement);
+    if (settings.popupElement.classList.contains(settings.popupOpenedClass) && evt.key === settings.closeKey) {
+      closePopup(settings.popupElement);
     }
   })
 }
 
-const getNewCardData = (popupAddElement) => {
+const getNewCardData = () => {
   const inputNameValue = popupAddElement.querySelector(photoNameInputSelector).value;
   const inputLinkValue = popupAddElement.querySelector(photoLinkInputSelector).value;
   const newCardData = {
@@ -155,7 +175,7 @@ const infoFormEventHandler = () => {
 }
 
 const addFormEventHandler = () => {
-  const newCardData = getNewCardData(popupAddElement);
+  const newCardData = getNewCardData();
   addCard(photoTemplateSelector, newCardData, photoCardSettings, photoListElement);
   closePopup(popupAddElement);
 }
@@ -171,8 +191,8 @@ const setFormsEventListeners = () => {
   });
 }
 
-setPopupEventListeners(profileSectionElement, popupEditProfileElement, popupEditClass, editProfileButtonClass, popupEditCloseButtonClass, popupOpenedClass, escapeKey);
-setPopupEventListeners(profileSectionElement, popupAddElement, popupAddClass, addCardButtonClass, popupAddCloseButtonClass, popupOpenedClass, escapeKey);
+setPopupEventListeners(popupEditEventListenersSettings);
+setPopupEventListeners(popupAddEventListenersSettings);
 setFormsEventListeners();
 // =========================================================
 function func () {
