@@ -49,6 +49,8 @@ const photoTemplateSelector = '#photos-element';
 const profileNameSelector = '.profile__name';
 const profileCaptionSelector = '.profile__caption';
 const formInputSelector = '.form__input';
+const photoNameInputSelector = '#photo-name';
+const photoLinkInputSelector = '#photo-link';
 // classes
 const addCardButtonClass = 'profile__add-button';
 const editProfileButtonClass = 'profile__edit-button';
@@ -137,12 +139,12 @@ const setPopupEventListeners = (element, popupElement, popupClass, openingPointC
 }
 
 const getNewCardData = (popupAddElement) => {
-  const inputs = Array.from(popupAddElement.querySelectorAll(formInputSelector));
+  const inputNameValue = popupAddElement.querySelector(photoNameInputSelector).value;
+  const inputLinkValue = popupAddElement.querySelector(photoLinkInputSelector).value;
   const newCardData = {
-    name: inputs[0].value,
-    link: inputs[1].value,
+    name: inputNameValue,
+    link: inputLinkValue,
   }
-  console.log(newCardData)
   return newCardData;
 }
 
