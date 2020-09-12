@@ -66,6 +66,7 @@ class Card {
     this._cardElement = this._getPhotoElement(cardsSettings).cloneNode(true);
     this._cardElement.querySelector(cardsSettings.photoImageSelector).src = this._cardData.link;
     this._cardElement.querySelector(cardsSettings.photoFigcaptionSelector).textContent = this._cardData.name;
+    this._cardElement.querySelector(cardsSettings.photoImageSelector).alt = `фотография ${this._cardData.name}`
     container.prepend(this._cardElement);
   }
 
@@ -76,6 +77,8 @@ class Card {
       const card = cardElement.cloneNode(true);
       card.querySelector(cardsSettings.photoImageSelector).src = element.link;
       card.querySelector(cardsSettings.photoFigcaptionSelector).textContent = element.name;
+      card.querySelector(cardsSettings.photoImageSelector).alt = `фотография ${element.name}`
+
       cardsList.append(card);
     })
     this._setEventListeners(cardsList, cardsSettings)
