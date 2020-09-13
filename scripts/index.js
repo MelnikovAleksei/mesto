@@ -34,6 +34,7 @@ const profileCaptionSelector = '.profile__caption';
 const formInputSelector = '.form__input';
 const photoNameInputSelector = '#photo-name';
 const photoLinkInputSelector = '#photo-link';
+const formSelector = '.form';
 // classes
 const addCardButtonClass = 'profile__add-button';
 const editProfileButtonClass = 'profile__edit-button';
@@ -99,10 +100,8 @@ const initializeProfileInfo = () => {
 }
 
 const clearInputValue = (popupElement) => {
-  const inputs = Array.from(popupElement.querySelectorAll(formInputSelector));
-  inputs.forEach(element => {
-    element.value = '';
-  })
+  const form = popupElement.querySelector(formSelector);
+  form.reset();
 }
 
 const openPopup = (popupElement) => {
