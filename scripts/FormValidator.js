@@ -38,17 +38,6 @@ class FormValidator {
           this._formSubmitButton.classList.remove(this._settings.inactiveButtonClass);
         }
     }
-    _openCheckValidity() {
-      const profileSectionElement = document.querySelector(this._settings.profileSectionSelector);
-      profileSectionElement.addEventListener('click', (evt) => {
-        if (evt.target.classList.contains(this._settings.addCardButtonClass) || evt.target.classList.contains(this._settings.editProfileButtonClass)) {
-          this._formInputs.forEach((inputElement) => {
-            this._checkInputValidity(inputElement);
-            this._toggleSubmitButtonState()
-          });
-        }
-      })
-    }
     _inputEventListener(evt) {
       const inputElement = evt.target;
       this._checkInputValidity(inputElement);
@@ -63,7 +52,6 @@ class FormValidator {
             this._inputEventListener(evt);
           });
         })
-        this._openCheckValidity();
     }
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
