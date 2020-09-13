@@ -53,11 +53,6 @@ const initialCardsData = [
   }
 ];
 
-const newCardData =  {
-  name: 'Архыз',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-}
-
 // selectors
 const photoTemplateSelector = '#photos-element';
 const profileNameSelector = '.profile__name';
@@ -128,7 +123,6 @@ const addCard = (templateSelector, cardData, cardsSettings, container) => {
 }
 
 initCards(photoTemplateSelector, initialCardsData, photoCardSettings);
-addCard(photoTemplateSelector, newCardData, photoCardSettings, photoListElement);
 
 const initializeProfileInfo = () => {
   inputProfileNameElement.value = profileName.textContent;
