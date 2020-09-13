@@ -105,9 +105,6 @@ const clearInputValue = (popupElement) => {
 }
 
 const openPopup = (popupElement) => {
-  if (popupElement.classList.contains(popupEditClass)) {
-    initializeProfileInfo();
-  }
   popupElement.classList.add(popupOpenedClass);
 }
 
@@ -118,7 +115,11 @@ const closePopup = (popupElement) => {
 
 const setPopupEventListeners = (settings) => {
   settings.element.addEventListener('click', (evt) => {
+
     if (evt.target.classList.contains(settings.openingPointClass)) {
+      if (settings.popupElement.classList.contains(popupEditClass)) {
+        initializeProfileInfo();
+      }
       openPopup(settings.popupElement);
     }
   })
