@@ -63,12 +63,9 @@ const photoLinkInputSelector = '#photo-link';
 // classes
 const addCardButtonClass = 'profile__add-button';
 const editProfileButtonClass = 'profile__edit-button';
-const photoImageClass = 'photos__image';
 const popupOpenedClass = 'popup_opened';
 const popupAddClass = 'popup-add';
 const popupEditClass = 'popup-edit';
-const popupPhotoClass = 'popup-photos';
-const popupPhotoCloseButtonClass = 'popup-photos__close-button';
 const popupEditCloseButtonClass = 'popup-edit__close-button';
 const popupAddCloseButtonClass = 'popup-add__close-button';
 
@@ -76,11 +73,9 @@ const popupAddCloseButtonClass = 'popup-add__close-button';
 const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
 
 const profileSectionElement = document.querySelector('.profile');
-const addCardButtonElement = profileSectionElement.querySelector('.profile__add-button');
 
 const popupAddElement = document.querySelector('.popup-add');
 const popupEditProfileElement = document.querySelector('.popup-edit');
-const popupPhotoElement = document.querySelector('.popup-photo');
 
 const infoFormElement = document.forms.info;
 const addFormElement = document.forms.photo;
@@ -136,7 +131,7 @@ const clearInputValue = (popupElement) => {
   })
 }
 
-const openPopup = (element, popupElement) => {
+const openPopup = (popupElement) => {
   if (popupElement.classList.contains(popupEditClass)) {
     initializeProfileInfo();
   }
@@ -151,7 +146,7 @@ const closePopup = (popupElement) => {
 const setPopupEventListeners = (settings) => {
   settings.element.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(settings.openingPointClass)) {
-      openPopup(settings.element, settings.popupElement);
+      openPopup(settings.popupElement);
     }
   })
   settings.popupElement.addEventListener('click', (evt) => {
