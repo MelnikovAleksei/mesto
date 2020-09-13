@@ -1,4 +1,5 @@
 import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js'
 
 const photoCardSettings = {
   photoListSelector: '.photos__list',
@@ -10,6 +11,16 @@ const photoCardSettings = {
   photoImageClass: 'photos__image',
   photoLikeButtonClass: 'photos__like-button',
   photoDeleteButtonClass: 'photos__delete-button',
+}
+
+const validationSettings = {
+  formSelector: '.form',
+  fieldsetSelector: '.form__fieldset',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__save-button',
+  inactiveButtonClass: 'form__save-button_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active',
 }
 
 const initialCardsData = [
@@ -194,6 +205,15 @@ const setFormsEventListeners = () => {
 setPopupEventListeners(popupEditEventListenersSettings);
 setPopupEventListeners(popupAddEventListenersSettings);
 setFormsEventListeners();
+
+const setFormValidation = (settings, formElement) => {
+  const formValidator = new FormValidator(settings, formElement);
+  formValidator.enableValidation();
+}
+
+setFormValidation(validationSettings, infoFormElement);
+setFormValidation(validationSettings, addFormElement);
+
 // =========================================================
 function func () {
 
