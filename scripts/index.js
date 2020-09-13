@@ -12,6 +12,7 @@ const photoCardSettings = {
   photoImageClass: 'photos__image',
   photoLikeButtonClass: 'photos__like-button',
   photoDeleteButtonClass: 'photos__delete-button',
+  photoLikedButtonClass: 'photos__like-button_liked',
 }
 
 const validationSettings = {
@@ -43,6 +44,8 @@ const popupAddClass = 'popup-add';
 const popupEditClass = 'popup-edit';
 const popupEditCloseButtonClass = 'popup-edit__close-button';
 const popupAddCloseButtonClass = 'popup-add__close-button';
+const inputErrorClass = 'form__input_type_error';
+const errorClass = 'form__input-error_active';
 
 // elements
 const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
@@ -59,6 +62,8 @@ const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profi
 
 const profileName = profileSectionElement.querySelector(profileNameSelector);
 const profileCaption = profileSectionElement.querySelector(profileCaptionSelector);
+const popupInputsList = Array.from(document.querySelectorAll(formInputSelector));
+const popupErrorsList = Array.from(document.querySelectorAll(`${formInputSelector}-error`));
 
 const escapeKey = 'Escape';
 
@@ -82,17 +87,15 @@ const popupEditEventListenersSettings = {
   closeKey: escapeKey,
 }
 
-const initCards = (templateSelector, cardsData, cardsSettings) => {
-  const card = new Card(cardsData, templateSelector);
-  card.initialize(cardsData, cardsSettings);
+const renderElements = () => {
+  initialCardsData.forEach(cardData => {
+    const card = new Card(cardData, photoTemplateSelector, photoCardSettings);
+    const cardElement = card.generateCard();
+    photoListElement.append(cardElement);
+  })
 }
 
-const addCard = (templateSelector, cardData, cardsSettings, container) => {
-  const card = new Card(cardData, templateSelector);
-  card.generateCard(cardsSettings, container);
-}
-
-initCards(photoTemplateSelector, initialCardsData, photoCardSettings);
+renderElements();
 
 const initializeProfileInfo = () => {
   inputProfileNameElement.value = profileName.textContent;
@@ -110,6 +113,7 @@ const openPopup = (popupElement) => {
 
 const closePopup = (popupElement) => {
   clearInputValue(popupElement);
+  hideErrorMessages();
   popupElement.classList.remove(popupOpenedClass);
 }
 
@@ -151,9 +155,15 @@ const infoFormEventHandler = () => {
   closePopup(popupEditProfileElement);
 }
 
+const addCard = (cardData, photoTemplateSelector, photoCardSettings) => {
+  const card = new Card(cardData, photoTemplateSelector, photoCardSettings);
+  const cardElement = card.generateCard();
+  photoListElement.prepend(cardElement);
+}
+
 const addFormEventHandler = () => {
-  const newCardData = getNewCardData();
-  addCard(photoTemplateSelector, newCardData, photoCardSettings, photoListElement);
+  const cardData = getNewCardData();
+  addCard(cardData, photoTemplateSelector, photoCardSettings);
   closePopup(popupAddElement);
 }
 
@@ -166,6 +176,16 @@ const setFormsEventListeners = () => {
     evt.preventDefault();
     infoFormEventHandler();
   });
+}
+
+const hideErrorMessages = () => {
+  popupInputsList.forEach(element => {
+    element.classList.remove(inputErrorClass);
+  })
+  popupErrorsList.forEach(element => {
+    element.textContent = '';
+    element.classList.remove(errorClass);
+  })
 }
 
 setPopupEventListeners(popupEditEventListenersSettings);
