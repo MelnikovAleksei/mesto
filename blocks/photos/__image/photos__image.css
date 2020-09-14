@@ -1,5 +1,5 @@
 .photos__image {
   width: 282px;
-  min-height: 282px;
+  height: 282px;
   cursor: pointer;
 }
