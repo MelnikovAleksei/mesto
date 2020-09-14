@@ -39,11 +39,12 @@ const photoNameInputSelector = '#photo-name';
 const photoLinkInputSelector = '#photo-link';
 const formSelector = '.form';
 // classes
-const addCardButtonClass = 'profile__add-button';
 const editProfileButtonClass = 'profile__edit-button';
+const popupClass = 'popup';
 const popupOpenedClass = 'popup_opened';
 const popupAddClass = 'popup-add';
 const popupEditClass = 'popup-edit';
+const popupCloseButtonClass = 'popup__close-button';
 const popupEditCloseButtonClass = 'popup-edit__close-button';
 const popupAddCloseButtonClass = 'popup-add__close-button';
 const inputErrorClass = 'form__input_type_error';
@@ -53,6 +54,8 @@ const errorClass = 'form__input-error_active';
 const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
 
 const profileSectionElement = document.querySelector('.profile');
+const addButtonElement = profileSectionElement.querySelector('.profile__add-button');
+const editButtonElement = profileSectionElement.querySelector('.profile__edit-button');
 
 const popupAddElement = document.querySelector('.popup-add');
 const popupEditProfileElement = document.querySelector('.popup-edit');
@@ -69,25 +72,7 @@ const popupErrorsList = Array.from(document.querySelectorAll(`${formInputSelecto
 
 const escapeKey = 'Escape';
 
-const popupAddEventListenersSettings = {
-  element: profileSectionElement,
-  popupElement: popupAddElement,
-  popupClass: popupAddClass,
-  openingPointClass: addCardButtonClass,
-  closeButtonClass: popupAddCloseButtonClass,
-  popupOpenedClass: popupOpenedClass,
-  closeKey: escapeKey,
-}
-
-const popupEditEventListenersSettings = {
-  element: profileSectionElement,
-  popupElement: popupEditProfileElement,
-  popupClass: popupEditClass,
-  openingPointClass: editProfileButtonClass,
-  closeButtonClass: popupEditCloseButtonClass,
-  popupOpenedClass: popupOpenedClass,
-  closeKey: escapeKey,
-}
+let openPopupElement = null;
 
 const renderCard = (data) => {
   const card = new Card(data, photoTemplateSelector, photoCardSettings);
@@ -110,36 +95,24 @@ const clearInputValue = (popupElement) => {
   form.reset();
 }
 
+const handleEscapePress = (evt) => {
+  if (evt.key === escapeKey) {
+    closePopup(openPopupElement)
+  }
+}
+
 const openPopup = (popupElement) => {
   popupElement.classList.add(popupOpenedClass);
+  openPopupElement = popupElement;
+  document.addEventListener('keydown', handleEscapePress);
 }
 
 const closePopup = (popupElement) => {
   clearInputValue(popupElement);
   hideErrorMessages();
+  document.removeEventListener('keydown', handleEscapePress);
+  openPopupElement = null;
   popupElement.classList.remove(popupOpenedClass);
-}
-
-const setPopupEventListeners = (settings) => {
-  settings.element.addEventListener('click', (evt) => {
-
-    if (evt.target.classList.contains(settings.openingPointClass)) {
-      if (settings.popupElement.classList.contains(popupEditClass)) {
-        initializeProfileInfo();
-      }
-      openPopup(settings.popupElement);
-    }
-  })
-  settings.popupElement.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains(settings.closeButtonClass) || evt.target.classList.contains(settings.popupClass)) {
-      closePopup(settings.popupElement);
-    }
-  })
-  document.addEventListener('keydown', (evt) => {
-    if (settings.popupElement.classList.contains(settings.popupOpenedClass) && evt.key === settings.closeKey) {
-      closePopup(settings.popupElement);
-    }
-  })
 }
 
 const infoFormEventHandler = (evt) => {
@@ -174,8 +147,26 @@ const hideErrorMessages = () => {
   })
 }
 
-setPopupEventListeners(popupEditEventListenersSettings);
-setPopupEventListeners(popupAddEventListenersSettings);
+const popupCloseEventHandler = (evt, popupElement) => {
+  if (evt.target.classList.contains(popupCloseButtonClass) || evt.target.classList.contains(popupClass)) {
+    closePopup(popupElement);
+  }
+}
+
+addButtonElement.addEventListener('click', () => {
+  openPopup(popupAddElement);
+})
+editButtonElement.addEventListener('click', () => {
+  initializeProfileInfo();
+  openPopup(popupEditProfileElement);
+})
+popupAddElement.addEventListener('click', (evt) => {
+  popupCloseEventHandler(evt, popupAddElement);
+})
+popupEditProfileElement.addEventListener('click', (evt) => {
+  popupCloseEventHandler(evt, popupEditProfileElement);
+})
+
 setFormsEventListeners();
 
 const setFormValidation = (settings, formElement) => {
