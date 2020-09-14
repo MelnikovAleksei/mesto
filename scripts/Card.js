@@ -1,9 +1,9 @@
 import { openPhotoPopup } from './utils.js'
 
 class Card {
-  constructor(cardData, templateSelector, settings) {
-    this._cardName = cardData.name;
-    this._cardLink = cardData.link;
+  constructor(data, templateSelector, settings) {
+    this._cardName = data.name;
+    this._cardLink = data.link;
     this._templateSelector = templateSelector;
     this._settings = settings;
   }

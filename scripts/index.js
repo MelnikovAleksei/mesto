@@ -89,15 +89,16 @@ const popupEditEventListenersSettings = {
   closeKey: escapeKey,
 }
 
-const renderElements = () => {
-  initialCardsData.forEach(cardData => {
-    const card = new Card(cardData, photoTemplateSelector, photoCardSettings);
-    const cardElement = card.generateCard();
-    photoListElement.append(cardElement);
-  })
+const renderCard = (data) => {
+  const card = new Card(data, photoTemplateSelector, photoCardSettings);
+  const cardElement = card.generateCard();
+  return cardElement;
 }
 
-renderElements();
+initialCardsData.forEach(data => {
+  const cardElement = renderCard(data);
+  photoListElement.append(cardElement);
+})
 
 const initializeProfileInfo = () => {
   inputProfileNameElement.value = profileName.textContent;
@@ -141,43 +142,26 @@ const setPopupEventListeners = (settings) => {
   })
 }
 
-const getNewCardData = () => {
-  const inputNameValue = popupAddElement.querySelector(photoNameInputSelector).value;
-  const inputLinkValue = popupAddElement.querySelector(photoLinkInputSelector).value;
-  const newCardData = {
-    name: inputNameValue,
-    link: inputLinkValue,
-  }
-  return newCardData;
-}
-
-const infoFormEventHandler = () => {
+const infoFormEventHandler = (evt) => {
+  evt.preventDefault();
   profileName.textContent = inputProfileNameElement.value;
   profileCaption.textContent = inputProfileCaptionElement.value;
   closePopup(popupEditProfileElement);
 }
 
-const addCard = (cardData, photoTemplateSelector, photoCardSettings) => {
-  const card = new Card(cardData, photoTemplateSelector, photoCardSettings);
-  const cardElement = card.generateCard();
+const addFormEventHandler = (evt) => {
+  evt.preventDefault();
+  const cardElement = renderCard({
+    name: popupAddElement.querySelector(photoNameInputSelector).value,
+    link: popupAddElement.querySelector(photoLinkInputSelector).value,
+  })
   photoListElement.prepend(cardElement);
-}
-
-const addFormEventHandler = () => {
-  const cardData = getNewCardData();
-  addCard(cardData, photoTemplateSelector, photoCardSettings);
   closePopup(popupAddElement);
 }
 
 const setFormsEventListeners = () => {
-  addFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    addFormEventHandler();
-  })
-  infoFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    infoFormEventHandler();
-  });
+  addFormElement.addEventListener('submit', addFormEventHandler);
+  infoFormElement.addEventListener('submit', infoFormEventHandler);
 }
 
 const hideErrorMessages = () => {
