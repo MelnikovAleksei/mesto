@@ -110,7 +110,6 @@ const openPopup = (popupElement) => {
 
 const closePopup = (popupElement) => {
   clearInputValue(popupElement);
-  hideErrorMessages();
   document.removeEventListener('keydown', handleEscapePress);
   openPopupElement = null;
   popupElement.classList.remove(popupOpenedClass);
@@ -136,16 +135,6 @@ const addFormEventHandler = (evt) => {
 const setFormsEventListeners = () => {
   addFormElement.addEventListener('submit', addFormEventHandler);
   infoFormElement.addEventListener('submit', infoFormEventHandler);
-}
-
-const hideErrorMessages = () => {
-  popupInputsList.forEach(element => {
-    element.classList.remove(inputErrorClass);
-  })
-  popupErrorsList.forEach(element => {
-    element.textContent = '';
-    element.classList.remove(errorClass);
-  })
 }
 
 const popupCloseEventHandler = (evt, popupElement) => {

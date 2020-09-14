@@ -43,16 +43,17 @@ class FormValidator {
       this._checkInputValidity(inputElement);
       this._toggleSubmitButtonState();
     }
+
     _setEventListeners() {
         this._formInputs = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
         this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
         this._editButton = document.querySelector(this._settings.editProfileButtonSelector);
         this._addButton = document.querySelector(this._settings.addCardButtonSelector);
         this._editButton.addEventListener('click', () => {
-          this._toggleSubmitButtonState();
+          //this._toggleSubmitButtonState();
         })
         this._addButton.addEventListener('click', () => {
-          this._toggleSubmitButtonState();
+          //this._toggleSubmitButtonState();
         })
         this._toggleSubmitButtonState();
         this._formInputs.forEach(inputElement => {
@@ -60,11 +61,24 @@ class FormValidator {
             this._inputEventListener(evt);
           });
         })
-
+    }
+    _hideErrorMessages() {
+      this._inputsList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+      this._inputsList.forEach(element => {
+        element.classList.remove(this._settings.inputErrorClass);
+      })
+      this._errorsList = Array.from(this._formElement.querySelectorAll(`${this._settings.inputSelector}-error`));
+      this._errorsList.forEach(element => {
+        element.textContent = '';
+        element.classList.remove(this._settings.errorClass);
+      })
     }
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
+        })
+        this._formElement.addEventListener('reset', (evt) => {
+          this._hideErrorMessages();
         })
         this._setEventListeners();
     }
