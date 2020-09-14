@@ -1,5 +1,5 @@
 class FormValidator {
-    constructor(settings, formElement) {
+    constructor(formElement, settings) {
         this._settings = settings;
         this._formElement = formElement;
     }
@@ -43,9 +43,9 @@ class FormValidator {
       this._checkInputValidity(inputElement);
       this._toggleSubmitButtonState();
     }
-    _setEventListeners(fieldset) {
-        this._formInputs = Array.from(fieldset.querySelectorAll(this._settings.inputSelector));
-        this._formSubmitButton = fieldset.querySelector(this._settings.submitButtonSelector);
+    _setEventListeners() {
+        this._formInputs = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+        this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
         this._editButton = document.querySelector(this._settings.editProfileButtonSelector);
         this._addButton = document.querySelector(this._settings.addCardButtonSelector);
         this._editButton.addEventListener('click', () => {
@@ -60,15 +60,13 @@ class FormValidator {
             this._inputEventListener(evt);
           });
         })
+
     }
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
-        const fieldsetList = Array.from(this._formElement.querySelectorAll(this._settings.fieldsetSelector));
-        fieldsetList.forEach(fieldset => {
-          this._setEventListeners(fieldset);
-        })
+        this._setEventListeners();
     }
 }
 

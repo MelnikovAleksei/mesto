@@ -60,8 +60,9 @@ const editButtonElement = profileSectionElement.querySelector('.profile__edit-bu
 const popupAddElement = document.querySelector('.popup-add');
 const popupEditProfileElement = document.querySelector('.popup-edit');
 
-const infoFormElement = document.forms.info;
+const formsList = Array.from(document.forms);
 const addFormElement = document.forms.photo;
+const infoFormElement = document.forms.info;
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
@@ -169,10 +170,11 @@ popupEditProfileElement.addEventListener('click', (evt) => {
 
 setFormsEventListeners();
 
-const setFormValidation = (settings, formElement) => {
-  const formValidator = new FormValidator(settings, formElement);
+const setFormValidation = (formElement) => {
+  const formValidator = new FormValidator(formElement, validationSettings);
   formValidator.enableValidation();
 }
 
-setFormValidation(validationSettings, infoFormElement);
-setFormValidation(validationSettings, addFormElement);
+formsList.forEach(form => {
+  setFormValidation(form);
+})
