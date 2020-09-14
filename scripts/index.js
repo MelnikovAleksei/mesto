@@ -40,16 +40,9 @@ const photoLinkInputSelector = '#photo-link';
 const formSelector = '.form';
 const openFormButtonSelector = '.button-open-form';
 // classes
-const editProfileButtonClass = 'profile__edit-button';
 const popupClass = 'popup';
 const popupOpenedClass = 'popup_opened';
-const popupAddClass = 'popup-add';
-const popupEditClass = 'popup-edit';
 const popupCloseButtonClass = 'popup__close-button';
-const popupEditCloseButtonClass = 'popup-edit__close-button';
-const popupAddCloseButtonClass = 'popup-add__close-button';
-const inputErrorClass = 'form__input_type_error';
-const errorClass = 'form__input-error_active';
 
 // elements
 const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
@@ -70,8 +63,6 @@ const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profi
 
 const profileName = profileSectionElement.querySelector(profileNameSelector);
 const profileCaption = profileSectionElement.querySelector(profileCaptionSelector);
-const popupInputsList = Array.from(document.querySelectorAll(formInputSelector));
-const popupErrorsList = Array.from(document.querySelectorAll(`${formInputSelector}-error`));
 
 const escapeKey = 'Escape';
 
