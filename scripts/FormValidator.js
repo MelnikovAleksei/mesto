@@ -46,6 +46,14 @@ class FormValidator {
     _setEventListeners(fieldset) {
         this._formInputs = Array.from(fieldset.querySelectorAll(this._settings.inputSelector));
         this._formSubmitButton = fieldset.querySelector(this._settings.submitButtonSelector);
+        this._editButton = document.querySelector(this._settings.editProfileButtonSelector);
+        this._addButton = document.querySelector(this._settings.addCardButtonSelector);
+        this._editButton.addEventListener('click', () => {
+          this._toggleSubmitButtonState();
+        })
+        this._addButton.addEventListener('click', () => {
+          this._toggleSubmitButtonState();
+        })
         this._toggleSubmitButtonState();
         this._formInputs.forEach(inputElement => {
           inputElement.addEventListener('input', (evt) => {

@@ -24,8 +24,10 @@ const validationSettings = {
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active',
   profileSectionSelector: '.profile',
-  addCardButtonClass: 'profile__add-button',
-  editProfileButtonClass: 'profile__edit-button',
+  addCardButtonSelector: '.profile__add-button',
+  editProfileButtonSelector: '.profile__edit-button',
+  popupSelector: '.popup',
+  popupOpenedClass: 'popup_opened',
 }
 
 // selectors
