@@ -1,7 +1,8 @@
 class FormValidator {
-    constructor(formElement, settings) {
-        this._settings = settings;
-        this._formElement = formElement;
+    constructor(formElement, openFormButtons, settings) {
+      this._formElement = formElement;
+      this._settings = settings;
+      this._openFormButtons = openFormButtons;
     }
     _getErrorElement(inputElement) {
       return this._formElement.querySelector(`#${inputElement.id}-error`);
@@ -30,13 +31,13 @@ class FormValidator {
       }
     }
     _toggleSubmitButtonState() {
-        if (this._hasInvalidInput(this._formInputs)) {
-          this._formSubmitButton.disabled = true;
-          this._formSubmitButton.classList.add(this._settings.inactiveButtonClass);
-        } else {
-          this._formSubmitButton.disabled = false;
-          this._formSubmitButton.classList.remove(this._settings.inactiveButtonClass);
-        }
+      if (this._hasInvalidInput(this._formInputs)) {
+        this._formSubmitButton.disabled = true;
+        this._formSubmitButton.classList.add(this._settings.inactiveButtonClass);
+      } else {
+        this._formSubmitButton.disabled = false;
+        this._formSubmitButton.classList.remove(this._settings.inactiveButtonClass);
+      }
     }
     _inputEventListener(evt) {
       const inputElement = evt.target;
@@ -57,32 +58,29 @@ class FormValidator {
     }
 
     _setEventListeners() {
-        this._formElement.addEventListener('reset', (evt) => {
-          this._hideErrorMessages();
+      this._formElement.addEventListener('reset', () => {
+        this._hideErrorMessages();
+      })
+      this._formInputs = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+      this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
+      this._openFormButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          this._toggleSubmitButtonState();
         })
-        this._formInputs = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
-        this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
-        this._editButton = document.querySelector(this._settings.editProfileButtonSelector);
-        this._addButton = document.querySelector(this._settings.addCardButtonSelector);
-        this._editButton.addEventListener('click', () => {
-          //this._toggleSubmitButtonState();
-        })
-        this._addButton.addEventListener('click', () => {
-          //this._toggleSubmitButtonState();
-        })
-        this._toggleSubmitButtonState();
-        this._formInputs.forEach(inputElement => {
-          inputElement.addEventListener('input', (evt) => {
-            this._inputEventListener(evt);
-          });
-        })
+      })
+      this._toggleSubmitButtonState();
+      this._formInputs.forEach(inputElement => {
+        inputElement.addEventListener('input', (evt) => {
+          this._inputEventListener(evt);
+        });
+      })
     }
 
     enableValidation() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
-        this._setEventListeners();
+      this._formElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+      })
+      this._setEventListeners();
     }
 }
 

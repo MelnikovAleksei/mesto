@@ -38,6 +38,7 @@ const formInputSelector = '.form__input';
 const photoNameInputSelector = '#photo-name';
 const photoLinkInputSelector = '#photo-link';
 const formSelector = '.form';
+const openFormButtonSelector = '.button-open-form';
 // classes
 const editProfileButtonClass = 'profile__edit-button';
 const popupClass = 'popup';
@@ -54,6 +55,7 @@ const errorClass = 'form__input-error_active';
 const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
 
 const profileSectionElement = document.querySelector('.profile');
+const openFormButtonsList = Array.from(profileSectionElement.querySelectorAll(openFormButtonSelector));
 const addButtonElement = profileSectionElement.querySelector('.profile__add-button');
 const editButtonElement = profileSectionElement.querySelector('.profile__edit-button');
 
@@ -160,7 +162,7 @@ popupEditProfileElement.addEventListener('click', (evt) => {
 setFormsEventListeners();
 
 const setFormValidation = (formElement) => {
-  const formValidator = new FormValidator(formElement, validationSettings);
+  const formValidator = new FormValidator(formElement, openFormButtonsList, validationSettings);
   formValidator.enableValidation();
 }
 
