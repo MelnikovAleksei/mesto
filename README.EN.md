@@ -6,7 +6,7 @@
 
 [Deploy on GitHub Pages](https://melnikovaleksei.github.io/mesto/index)
 
-### The work uses advanced HTML and CSS, JavaScript (DOM), Client-side form validation, git
+### The work uses advanced HTML and CSS, JavaScript (OOP, DOM), Client-side form validation, git
 
 ### Technologies:
 * Flexbox
@@ -16,7 +16,7 @@
 * BEM Methodology
 * File Structure and File Paths (Nested BEM)
 * Git
-* JavaScript (DOM)
+* JavaScript (OOP, DOM)
 * Client-side form validation 
 
 ### Languages:
@@ -27,9 +27,10 @@
 #### Project Brief in Figma: 
 * [Brief 4](https://www.figma.com/file/SLGf16iUspCIjC05qUi1dk/YP-project-4-mesto) 
 * [Brief 5](https://www.figma.com/file/n0Ho0JWLOCYiVkrboLTVJo/sprint-5-mesto) 
-* [Brief 6](https://www.figma.com/file/qk3Axq4MZryPzGFfCnUnrP/sprint-6-mesto) 
+* [Brief 6-7](https://www.figma.com/file/qk3Axq4MZryPzGFfCnUnrP/sprint-6-mesto) 
 
 #### Project check list: 
 * [Check list 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html) 
 * [Check list 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html) 
 * [Check list 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html) 
+* [Check list 7](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html) 
