@@ -34,11 +34,11 @@ const validationSettings = {
 const photoTemplateSelector = '#photos-element';
 const profileNameSelector = '.profile__name';
 const profileCaptionSelector = '.profile__caption';
-const formInputSelector = '.form__input';
 const photoNameInputSelector = '#photo-name';
 const photoLinkInputSelector = '#photo-link';
 const formSelector = '.form';
 const openFormButtonSelector = '.button-open-form';
+const popupOpenedSelector = '.popup_opened';
 // classes
 const popupClass = 'popup';
 const popupOpenedClass = 'popup_opened';
@@ -66,8 +66,6 @@ const profileCaption = profileSectionElement.querySelector(profileCaptionSelecto
 
 const escapeKey = 'Escape';
 
-let openPopupElement = null;
-
 const renderCard = (data) => {
   const card = new Card(data, photoTemplateSelector, photoCardSettings);
   const cardElement = card.generateCard();
@@ -91,20 +89,19 @@ const clearInputValue = (popupElement) => {
 
 const handleEscapePress = (evt) => {
   if (evt.key === escapeKey) {
-    closePopup(openPopupElement)
+    const activePopup = document.querySelector(popupOpenedSelector);
+    closePopup(activePopup);
   }
 }
 
 const openPopup = (popupElement) => {
   popupElement.classList.add(popupOpenedClass);
-  openPopupElement = popupElement;
   document.addEventListener('keydown', handleEscapePress);
 }
 
 const closePopup = (popupElement) => {
   clearInputValue(popupElement);
   document.removeEventListener('keydown', handleEscapePress);
-  openPopupElement = null;
   popupElement.classList.remove(popupOpenedClass);
 }
 
