@@ -31,7 +31,7 @@
 * [Макет 5](https://www.figma.com/file/n0Ho0JWLOCYiVkrboLTVJo/sprint-5-mesto) 
 * [Макет 6-7](https://www.figma.com/file/qk3Axq4MZryPzGFfCnUnrP/sprint-6-mesto) 
 
-#### Чеклисты проектных работ:
+#### Чеклисты проектной работы:
 * [Чеклист 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html) 
 * [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html) 
 * [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html) 
