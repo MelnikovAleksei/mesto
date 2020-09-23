@@ -20,8 +20,6 @@
 * Client-side form validation 
 
 ### Языки:
-* HTML
-* CSS
 * JavaScript
 
 #### Макеты проектной работы в Figma:
