@@ -1,6 +1,6 @@
 # Проектная работа: "Место"
 
-## Создана в рамках учебы в [Яндекс.Практикум](https://praktikum.yandex.ru/) на курсе ["Веб-разработчик"](https://praktikum.yandex.ru/web/)
+## Создана в рамках учебы в [Яндекс.Практикум](https://praktikum.yandex.ru/) на курсе ["Веб-разработчик"](https://praktikum.yandex.ru/web/). Пользователь сайта может добавлять и удалять фотографии, ставить им «лайк». 
 
 *Read this in other languages:* [EN](https://github.com/MelnikovAleksei/mesto/blob/master/README.EN.md)
 
