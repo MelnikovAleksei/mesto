@@ -19,6 +19,10 @@
 * JavaScript (OOP, DOM) 
 * Client-side form validation 
 
+#### Будущая доработка проекта будет включать в себя:
+* сборка проекта средствами Webpack
+* перенос на библиотеку Reactjs
+
 ### Языки:
 * JavaScript
 
