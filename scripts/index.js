@@ -1,4 +1,5 @@
 import {initialCardsData} from './cardsData.js'
+import {Section} from './Section.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js'
 
