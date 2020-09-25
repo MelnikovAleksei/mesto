@@ -40,6 +40,9 @@ const photoLinkInputSelector = '#photo-link';
 const formSelector = '.form';
 const openFormButtonSelector = '.button-open-form';
 const popupOpenedSelector = '.popup_opened';
+
+const photoListSelector = '.photos__list';
+
 // classes
 const popupClass = 'popup';
 const popupOpenedClass = 'popup_opened';
@@ -67,16 +70,16 @@ const profileCaption = profileSectionElement.querySelector(profileCaptionSelecto
 
 const escapeKey = 'Escape';
 
-const renderCard = (data) => {
-  const card = new Card(data, photoTemplateSelector, photoCardSettings);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
+const cardsList = new Section({
+  items: initialCardsData,
+  renderer: (elem) => {
+    const card = new Card(elem, photoTemplateSelector, photoCardSettings);
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement);
+  }
+}, photoListSelector);
 
-initialCardsData.forEach(data => {
-  const cardElement = renderCard(data);
-  photoListElement.append(cardElement);
-})
+cardsList.renderItems();
 
 const initializeProfileInfo = () => {
   inputProfileNameElement.value = profileName.textContent;
