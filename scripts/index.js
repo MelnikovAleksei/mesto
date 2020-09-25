@@ -1,6 +1,7 @@
 import {initialCardsData} from './cardsData.js'
 import {Section} from './Section.js';
 import {Card} from './Card.js';
+import {Popup} from './Popup.js';
 import {FormValidator} from './FormValidator.js'
 
 const photoCardSettings = {
@@ -42,6 +43,8 @@ const openFormButtonSelector = '.button-open-form';
 const popupOpenedSelector = '.popup_opened';
 
 const photoListSelector = '.photos__list';
+const popupAddSelector = '.popup-add';
+const popupEditProfileSelector = '.popup-edit';
 
 // classes
 const popupClass = 'popup';
@@ -91,13 +94,6 @@ const clearInputValue = (popupElement) => {
   form.reset();
 }
 
-const handleEscapePress = (evt) => {
-  if (evt.key === escapeKey) {
-    const activePopup = document.querySelector(popupOpenedSelector);
-    closePopup(activePopup);
-  }
-}
-
 const openPopup = (popupElement) => {
   popupElement.classList.add(popupOpenedClass);
   document.addEventListener('keydown', handleEscapePress);
@@ -113,7 +109,6 @@ const infoFormEventHandler = (evt) => {
   evt.preventDefault();
   profileName.textContent = inputProfileNameElement.value;
   profileCaption.textContent = inputProfileCaptionElement.value;
-  closePopup(popupEditProfileElement);
 }
 
 const addFormEventHandler = (evt) => {
@@ -123,7 +118,6 @@ const addFormEventHandler = (evt) => {
     link: popupAddElement.querySelector(photoLinkInputSelector).value,
   })
   photoListElement.prepend(cardElement);
-  closePopup(popupAddElement);
 }
 
 const setFormsEventListeners = () => {
@@ -131,24 +125,18 @@ const setFormsEventListeners = () => {
   infoFormElement.addEventListener('submit', infoFormEventHandler);
 }
 
-const popupCloseEventHandler = (evt, popupElement) => {
-  if (evt.target.classList.contains(popupCloseButtonClass) || evt.target.classList.contains(popupClass)) {
-    closePopup(popupElement);
-  }
-}
+const addPhotoPopup = new Popup(popupAddSelector);
+const editProfilePopup = new Popup(popupEditProfileSelector);
+
+addPhotoPopup.setEventListeners();
+editProfilePopup.setEventListeners();
 
 addButtonElement.addEventListener('click', () => {
-  openPopup(popupAddElement);
+  addPhotoPopup.open();
 })
 editButtonElement.addEventListener('click', () => {
   initializeProfileInfo();
-  openPopup(popupEditProfileElement);
-})
-popupAddElement.addEventListener('click', (evt) => {
-  popupCloseEventHandler(evt, popupAddElement);
-})
-popupEditProfileElement.addEventListener('click', (evt) => {
-  popupCloseEventHandler(evt, popupEditProfileElement);
+  editProfilePopup.open();
 })
 
 setFormsEventListeners();
