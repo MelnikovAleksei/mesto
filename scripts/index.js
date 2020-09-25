@@ -131,9 +131,6 @@ const setFormsEventListeners = () => {
 const addPhotoPopup = new Popup(popupAddSelector);
 const editProfilePopup = new Popup(popupEditProfileSelector);
 
-addPhotoPopup.setEventListeners();
-editProfilePopup.setEventListeners();
-
 addButtonElement.addEventListener('click', () => {
   addPhotoPopup.open();
 })
