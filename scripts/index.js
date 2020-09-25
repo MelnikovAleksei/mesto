@@ -113,11 +113,14 @@ const infoFormEventHandler = (evt) => {
 
 const addFormEventHandler = (evt) => {
   evt.preventDefault();
-  const cardElement = renderCard({
+  const cardData = {
     name: popupAddElement.querySelector(photoNameInputSelector).value,
     link: popupAddElement.querySelector(photoLinkInputSelector).value,
-  })
-  photoListElement.prepend(cardElement);
+  };
+  const card = new Card(cardData, photoTemplateSelector, photoCardSettings);
+  const cardElement = card.generateCard();
+  cardsList.addItem(cardElement, 'prepend');
+  addPhotoPopup.close()
 }
 
 const setFormsEventListeners = () => {
