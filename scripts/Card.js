@@ -1,6 +1,6 @@
 import { openPhotoPopup } from './utils.js'
 
-class Card {
+export class Card {
   constructor(data, templateSelector, settings) {
     this._cardName = data.name;
     this._cardLink = data.link;
@@ -47,5 +47,3 @@ class Card {
     return this._element;
   }
 }
-
-export {Card}
