@@ -54,7 +54,7 @@ const cardsList = new Section({
   items: initialCardsData,
   renderer: (elem) => {
     const card = new Card(elem, photoTemplateSelector, photoCardSettings, {
-      photoPopupRenderer: (elem) => {
+      handleCardClick: (elem) => {
         const photoPopup = new PopupWithImage(popupPhotosSelector, elem);
         photoPopup.open();
       }
