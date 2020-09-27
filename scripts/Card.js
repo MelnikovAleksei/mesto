@@ -1,11 +1,10 @@
-import { openPhotoPopup } from './utils.js'
-
 export class Card {
-  constructor(data, templateSelector, settings) {
+  constructor(data, templateSelector, settings, { photoPopupRenderer }) {
     this._cardName = data.name;
     this._cardLink = data.link;
     this._templateSelector = templateSelector;
     this._settings = settings;
+    this._photoPopupRenderer = photoPopupRenderer;
   }
 
   _getTemplateElement() {
@@ -25,7 +24,7 @@ export class Card {
   }
   _setEventListeners() {
     this._photoImage.addEventListener('click', () => {
-      openPhotoPopup(this._element);
+      this._photoPopupRenderer(this._element);
     })
     this._likeButton = this._element.querySelector(this._settings.photoLikeButtonSelector);
     this._deleteButton = this._element.querySelector(this._settings.photoDeleteButtonSelector);

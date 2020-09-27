@@ -2,35 +2,15 @@ import {initialCardsData} from './cardsData.js'
 import {Section} from './Section.js';
 import {Card} from './Card.js';
 import {Popup} from './Popup.js';
-import {FormValidator} from './FormValidator.js'
+import {FormValidator} from './FormValidator.js';
+import {PopupWithImage} from './PopupWithImage.js';
 
-const photoCardSettings = {
-  photoListSelector: '.photos__list',
-  photoCardSelector: '.photos__card',
-  photoImageSelector: '.photos__image',
-  photoFigcaptionSelector: '.photos__figcaption',
-  photoLikeButtonSelector: '.photos__like-button',
-  photoDeleteButtonSelector: '.photos__delete-button',
-  photoImageClass: 'photos__image',
-  photoLikeButtonClass: 'photos__like-button',
-  photoDeleteButtonClass: 'photos__delete-button',
-  photoLikedButtonClass: 'photos__like-button_liked',
-}
+import {
+  photoCardSettings,
+  validationSettings
+} from './constants.js';
 
-const validationSettings = {
-  formSelector: '.form',
-  fieldsetSelector: '.form__fieldset',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__save-button',
-  inactiveButtonClass: 'form__save-button_inactive',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active',
-  profileSectionSelector: '.profile',
-  addCardButtonSelector: '.profile__add-button',
-  editProfileButtonSelector: '.profile__edit-button',
-  popupSelector: '.popup',
-  popupOpenedClass: 'popup_opened',
-}
+
 
 // selectors
 const photoTemplateSelector = '#photos-element';
@@ -40,19 +20,16 @@ const photoNameInputSelector = '#photo-name';
 const photoLinkInputSelector = '#photo-link';
 const formSelector = '.form';
 const openFormButtonSelector = '.button-open-form';
-const popupOpenedSelector = '.popup_opened';
 
 const photoListSelector = '.photos__list';
+const popupPhotosSelector = '.popup-photos';
 const popupAddSelector = '.popup-add';
 const popupEditProfileSelector = '.popup-edit';
 
 // classes
-const popupClass = 'popup';
 const popupOpenedClass = 'popup_opened';
-const popupCloseButtonClass = 'popup__close-button';
 
 // elements
-const photoListElement = document.querySelector(photoCardSettings.photoListSelector)
 
 const profileSectionElement = document.querySelector('.profile');
 const openFormButtonsList = Array.from(profileSectionElement.querySelectorAll(openFormButtonSelector));
@@ -76,13 +53,23 @@ const escapeKey = 'Escape';
 const cardsList = new Section({
   items: initialCardsData,
   renderer: (elem) => {
-    const card = new Card(elem, photoTemplateSelector, photoCardSettings);
+    const card = new Card(elem, photoTemplateSelector, photoCardSettings, {
+      photoPopupRenderer: (elem) => {
+        const photoPopup = new PopupWithImage(popupPhotosSelector, elem);
+        photoPopup.open();
+      }
+    });
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
   }
 }, photoListSelector);
 
 cardsList.renderItems();
+
+const openPhotoPopup = (elem) => {
+  const photoPopup = new PopupWithImage(popupPhotosSelector, elem);
+  photoPopup.open()
+}
 
 const initializeProfileInfo = () => {
   inputProfileNameElement.value = profileName.textContent;
