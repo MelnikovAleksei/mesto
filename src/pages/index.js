@@ -64,14 +64,19 @@ const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profi
 
 const photoPopup = new PopupWithImage(popupPhotosSelector);
 
+const createNewCard = (data) => {
+  const card = new Card(data, photoTemplateSelector, photoCardSettings, {
+    handleCardClick: (data) => {
+      photoPopup.open(data);
+    }
+  });
+  return card;
+}
+
 const cardsList = new Section({
   items: initialCardsData,
-  renderer: (elem) => {
-    const card = new Card(elem, photoTemplateSelector, photoCardSettings, {
-      handleCardClick: (elem) => {
-        photoPopup.open(elem);
-      }
-    });
+  renderer: (data) => {
+    const card = createNewCard(data)
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
   }
@@ -81,11 +86,7 @@ cardsList.renderItems();
 
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {
-    const card = new Card(data, photoTemplateSelector, photoCardSettings, {
-      handleCardClick: (data) => {
-        photoPopup.open(data);
-      }
-     })
+    const card = createNewCard(data);
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement, 'prepend');
   }
