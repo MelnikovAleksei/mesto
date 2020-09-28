@@ -11,6 +11,10 @@
    ```
    
 1. ```
+   cd mesto
+   ```
+   
+1. ```
    npm i webpack --save-dev
    ```
    
@@ -20,7 +24,7 @@
    
 1. ```
    npm run dev
-   ``` 
+   ```
 
 ### The work uses advanced HTML and CSS, JavaScript (OOP, DOM), Client-side form validation, git
 
