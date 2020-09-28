@@ -1,7 +1,6 @@
 export class Card {
   constructor(data, templateSelector, settings, { handleCardClick }) {
-    this._cardName = data.name;
-    this._cardLink = data.link;
+    this._data = data;
     this._templateSelector = templateSelector;
     this._settings = settings;
     this._handleCardClick = handleCardClick;
@@ -24,7 +23,7 @@ export class Card {
   }
   _setEventListeners() {
     this._photoImage.addEventListener('click', () => {
-      this._handleCardClick(this._element);
+      this._handleCardClick(this._data);
     })
     this._likeButton = this._element.querySelector(this._settings.photoLikeButtonSelector);
     this._deleteButton = this._element.querySelector(this._settings.photoDeleteButtonSelector);
@@ -39,9 +38,9 @@ export class Card {
     this._element = this._getTemplateElement();
     this._photoImage = this._element.querySelector(this._settings.photoImageSelector);
     this._photoFigcaption = this._element.querySelector(this._settings.photoFigcaptionSelector);
-    this._photoImage.src = this._cardLink;
-    this._photoImage.alt = `Фотография ${this._cardName}`;
-    this._photoFigcaption.textContent = this._cardName;
+    this._photoImage.src = this._data.link;
+    this._photoImage.alt = `Фотография ${this._data.name}`;
+    this._photoFigcaption.textContent = this._data.name;
     this._setEventListeners();
     return this._element;
   }

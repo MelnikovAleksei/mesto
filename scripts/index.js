@@ -1,22 +1,46 @@
 import {initialCardsData} from './cardsData.js'
 import {Section} from './Section.js';
 import {Card} from './Card.js';
-import {Popup} from './Popup.js';
 import {FormValidator} from './FormValidator.js';
 import {PopupWithImage} from './PopupWithImage.js';
 import {PopupWithForm} from './PopupWithForm.js';
+import {UserInfo} from './UserInfo.js';
 
-import {
-  photoCardSettings,
-  validationSettings
-} from './constants.js';
+// settings
 
+const photoCardSettings = {
+  photoListSelector: '.photos__list',
+  photoCardSelector: '.photos__card',
+  photoImageSelector: '.photos__image',
+  photoFigcaptionSelector: '.photos__figcaption',
+  photoLikeButtonSelector: '.photos__like-button',
+  photoDeleteButtonSelector: '.photos__delete-button',
+  photoImageClass: 'photos__image',
+  photoLikeButtonClass: 'photos__like-button',
+  photoDeleteButtonClass: 'photos__delete-button',
+  photoLikedButtonClass: 'photos__like-button_liked',
+}
 
+const validationSettings = {
+  formSelector: '.form',
+  fieldsetSelector: '.form__fieldset',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__save-button',
+  inactiveButtonClass: 'form__save-button_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active',
+  profileSectionSelector: '.profile',
+  addCardButtonSelector: '.profile__add-button',
+  editProfileButtonSelector: '.profile__edit-button',
+  popupSelector: '.popup',
+  popupOpenedClass: 'popup_opened',
+}
 
 // selectors
+
 const photoTemplateSelector = '#photos-element';
-const profileNameSelector = '.profile__name';
-const profileCaptionSelector = '.profile__caption';
+const userNameSelector = '.profile__name';
+const userCaptionSelector = '.profile__caption';
 const openFormButtonSelector = '.button-open-form';
 
 const photoListSelector = '.photos__list';
@@ -36,9 +60,6 @@ const formsList = Array.from(document.forms);
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
-const profileName = profileSectionElement.querySelector(profileNameSelector);
-const profileCaption = profileSectionElement.querySelector(profileCaptionSelector);
-
 const cardsList = new Section({
   items: initialCardsData,
   renderer: (elem) => {
@@ -55,48 +76,37 @@ const cardsList = new Section({
 
 cardsList.renderItems();
 
-const openPhotoPopup = (elem) => {
-  const photoPopup = new PopupWithImage(popupPhotosSelector, elem);
-  photoPopup.open()
-}
-
-const initializeProfileInfo = () => {
-  inputProfileNameElement.value = profileName.textContent;
-  inputProfileCaptionElement.value = profileCaption.textContent;
-}
-
-const infoFormEventHandler = (evt) => {
-  evt.preventDefault();
-  profileName.textContent = inputProfileNameElement.value;
-  profileCaption.textContent = inputProfileCaptionElement.value;
-}
-
-const addPhotoPopup = new Popup(popupAddSelector);
-const editProfilePopup = new Popup(popupEditProfileSelector);
-
-addButtonElement.addEventListener('click', () => {
-  addPhotoPopup.open();
-})
-editButtonElement.addEventListener('click', () => {
-  initializeProfileInfo();
-  editProfilePopup.open();
-})
-
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {
     const card = new Card(data, photoTemplateSelector, photoCardSettings, {
-      handleCardClick: (elem) => {
-        const photoPopup = new PopupWithImage(popupPhotosSelector, elem);
+      handleCardClick: (data) => {
+        const photoPopup = new PopupWithImage(popupPhotosSelector, data);
         photoPopup.open();
       }
      })
     const cardElement = card.generateCard();
-    console.log(cardElement)
-    cardsList.addItem(cardElement, 'prepend')
+    cardsList.addItem(cardElement, 'prepend');
   }
- })
+})
 
-popupWithAddForm.setEventListeners();
+const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
+  submit: (data) => {
+    const userInfo = new UserInfo({ userNameSelector, userCaptionSelector });
+    userInfo.setUserInfo(data);
+  }
+})
+
+addButtonElement.addEventListener('click', () => {
+  popupWithAddForm.open();
+})
+
+editButtonElement.addEventListener('click', () => {
+  const userInfo = new UserInfo({ userNameSelector, userCaptionSelector });
+  const userData = userInfo.getUserInfo();
+  inputProfileNameElement.value = userData.name;
+  inputProfileCaptionElement.value = userData.caption;
+  popupWithInfoForm.open();
+})
 
 const setFormValidation = (formElement) => {
   const formValidator = new FormValidator(formElement, openFormButtonsList, validationSettings);
