@@ -13,7 +13,15 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: '/node_modules/'
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|gif|woff2)$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
+      },
     ]
   },
   plugins: [
