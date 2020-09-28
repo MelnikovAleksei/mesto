@@ -8,7 +8,7 @@ export class PopupWithImage extends Popup {
 
   open() {
     this._popupElement.querySelector('.popup-photos__image').src = this._data.link;
-    this._popupElement.querySelector('.popup-photos__figcaption').alt = `фото ${this._data.name}`;
+    this._popupElement.querySelector('.popup-photos__image').alt = `Фотография ${this._data.name}`;
     this._popupElement.querySelector('.popup-photos__figcaption').textContent = this._data.name;
     super.open();
   }
