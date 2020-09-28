@@ -4,7 +4,23 @@
 
 *Read this in other languages:* [RU](https://github.com/MelnikovAleksei/mesto/blob/master/README.md)
 
-[Deploy on GitHub Pages](https://melnikovaleksei.github.io/mesto/index)
+## Installation instructions: 
+
+1. ```
+   git clone https://github.com/MelnikovAleksei/mesto.git 
+   ```
+   
+1. ```
+   npm i webpack --save-dev
+   ```
+   
+1. ```
+   npm run build
+   ```
+   
+1. ```
+   npm run dev
+   ``` 
 
 ### The work uses advanced HTML and CSS, JavaScript (OOP, DOM), Client-side form validation, git
 
@@ -18,10 +34,10 @@
 * Git
 * JavaScript (OOP, DOM)
 * Client-side form validation 
+* Webpack 
 
-### Languages:
-* HTML
-* CSS
+### Languages: 
+
 * JavaScript 
 
 #### Project Brief in Figma: 
@@ -34,3 +50,4 @@
 * [Check list 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html) 
 * [Check list 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html) 
 * [Check list 7](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html) 
+* [Check list 8](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-8/index.html) 
