@@ -1,6 +1,6 @@
 import './index.css';
 
-import {initialCardsData} from '../components/cardsData.js'
+import {initialCardsData} from '../utils/cardsData.js'
 import {Section} from '../components/Section.js';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
