@@ -28,25 +28,17 @@
 
 ## Инструкция по установке: 
 
-1. ```
-   git clone https://github.com/MelnikovAleksei/mesto.git 
-   ```
-   
-1. ```
-   cd mesto
-   ```
-   
-1. ```
-   npm i webpack --save-dev
-   ```
-   
-1. ```
-   npm run build
-   ```
-   
-1. ```
-   npm run dev
-   ```
+```
+git clone https://github.com/MelnikovAleksei/mesto.git
+
+cd mesto
+
+npm i webpack --save-dev
+
+npm run build
+
+npm run dev
+```
 
 ## Будущая доработка проекта будет включать в себя: 
 
