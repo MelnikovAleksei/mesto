@@ -11,6 +11,10 @@
    ```
    
 1. ```
+   cd mesto
+   ```
+   
+1. ```
    npm i webpack --save-dev
    ```
    
