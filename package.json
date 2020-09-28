@@ -4,7 +4,7 @@
   "description": "Project work. The work uses advanced HTML and CSS, JavaScript (OOP, DOM), Client-side form validation, git, Webpack",
   "main": "./src/pages/index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack",
+    "build": "rimraf dist && webpack",
     "dev": "webpack-dev-server --open --watch"
   },
   "repository": {
