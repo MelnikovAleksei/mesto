@@ -14,13 +14,16 @@ export class Card {
       .cloneNode(true);
     return cardElement;
   }
+
   _delete() {
     this._element.remove();
     this._element = null;
   }
+
   _like() {
     this._likeButton.classList.toggle(this._settings.photoLikedButtonClass);
   }
+
   _setEventListeners() {
     this._photoImage.addEventListener('click', () => {
       this._handleCardClick(this._data);
@@ -34,6 +37,7 @@ export class Card {
       this._delete();
     })
   }
+
   generateCard() {
     this._element = this._getTemplateElement();
     this._photoImage = this._element.querySelector(this._settings.photoImageSelector);
