@@ -63,6 +63,7 @@ const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
 const photoPopup = new PopupWithImage(popupPhotosSelector);
+const userInfo = new UserInfo({ userNameSelector, userCaptionSelector });
 
 const createNewCard = (data) => {
   const card = new Card(data, photoTemplateSelector, photoCardSettings, {
@@ -94,7 +95,6 @@ const popupWithAddForm = new PopupWithForm(popupAddSelector, {
 
 const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
   submit: (data) => {
-    const userInfo = new UserInfo({ userNameSelector, userCaptionSelector });
     userInfo.setUserInfo(data);
   }
 })
@@ -104,7 +104,6 @@ addButtonElement.addEventListener('click', () => {
 })
 
 editButtonElement.addEventListener('click', () => {
-  const userInfo = new UserInfo({ userNameSelector, userCaptionSelector });
   const userData = userInfo.getUserInfo();
   inputProfileNameElement.value = userData.name;
   inputProfileCaptionElement.value = userData.caption;
