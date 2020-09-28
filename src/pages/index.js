@@ -90,12 +90,14 @@ const popupWithAddForm = new PopupWithForm(popupAddSelector, {
     const card = createNewCard(data);
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement, 'prepend');
+    popupWithAddForm.close()
   }
 })
 
 const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
   submit: (data) => {
     userInfo.setUserInfo(data);
+    popupWithInfoForm.close();
   }
 })
 
