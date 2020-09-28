@@ -62,13 +62,14 @@ const formsList = Array.from(document.forms);
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
+const photoPopup = new PopupWithImage(popupPhotosSelector);
+
 const cardsList = new Section({
   items: initialCardsData,
   renderer: (elem) => {
     const card = new Card(elem, photoTemplateSelector, photoCardSettings, {
       handleCardClick: (elem) => {
-        const photoPopup = new PopupWithImage(popupPhotosSelector, elem);
-        photoPopup.open();
+        photoPopup.open(elem);
       }
     });
     const cardElement = card.generateCard();
@@ -82,8 +83,7 @@ const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {
     const card = new Card(data, photoTemplateSelector, photoCardSettings, {
       handleCardClick: (data) => {
-        const photoPopup = new PopupWithImage(popupPhotosSelector, data);
-        photoPopup.open();
+        photoPopup.open(data);
       }
      })
     const cardElement = card.generateCard();
