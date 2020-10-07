@@ -2,7 +2,9 @@
 
 ## Created as part of a study at [Yandex.Praktikum](https://praktikum.yandex.com/) on a web development course ["Web Developer"](https://practicum.yandex.com/web/)
 
-*Read this in other languages:* [RU](https://github.com/MelnikovAleksei/mesto/blob/master/README.md)
+*Read this in other languages:* [RU](https://github.com/MelnikovAleksei/mesto/blob/master/README.md) 
+
+[Project work on GitHub Pages](https://melnikovaleksei.github.io/mesto/) 
 
 ## Description:
 
