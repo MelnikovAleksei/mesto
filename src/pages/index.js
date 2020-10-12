@@ -68,6 +68,15 @@ const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profi
 const photoPopup = new PopupWithImage(popupPhotosSelector);
 const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
 
+const createNewCard = (data) => {
+  const card = new Card(data, photoTemplateSelector, photoCardSettings, {
+    handleCardClick: (data) => {
+      photoPopup.open(data);
+    }
+  });
+  return card;
+}
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
   headers: {
@@ -80,28 +89,21 @@ api.getInitialData()
   .then((data) => {
     const [userData, cardsData] = data;
     userInfo.setUserInfo(userData);
+    const cardsList = new Section({
+      items: cardsData,
+      renderer: (data) => {
+        const card = createNewCard(data)
+        const cardElement = card.generateCard();
+        cardsList.addItem(cardElement);
+      }
+    }, photoListSelector);
+    cardsList.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
   })
 
 
-const createNewCard = (data) => {
-  const card = new Card(data, photoTemplateSelector, photoCardSettings, {
-    handleCardClick: (data) => {
-      photoPopup.open(data);
-    }
-  });
-  return card;
-}
-
-const cardsList = new Section({
-  items: initialCardsData,
-  renderer: (data) => {
-    const card = createNewCard(data)
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
-  }
-}, photoListSelector);
-
-cardsList.renderItems();
 
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {
@@ -114,7 +116,13 @@ const popupWithAddForm = new PopupWithForm(popupAddSelector, {
 
 const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
   submit: (data) => {
-    userInfo.setUserInfo(data);
+    api.setUserInfo(data)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     popupWithInfoForm.close();
   }
 })
@@ -126,7 +134,7 @@ addButtonElement.addEventListener('click', () => {
 editButtonElement.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
   inputProfileNameElement.value = userData.name;
-  inputProfileCaptionElement.value = userData.caption;
+  inputProfileCaptionElement.value = userData.about;
   popupWithInfoForm.open();
 })
 

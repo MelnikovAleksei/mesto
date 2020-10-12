@@ -11,7 +11,7 @@ export class UserInfo {
   getUserInfo() {
     const data = {
       name: this._name.textContent,
-      caption: this._caption.textContent
+      about: this._caption.textContent
     };
     return data;
   }

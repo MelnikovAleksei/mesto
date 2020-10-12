@@ -4,6 +4,22 @@ export class Api {
     this._headers = options.headers;
   }
 
+  setUserInfo(data) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
   getInitialData() {
     return Promise.all([this.getUserInfo(), this.getCards()]);
   }
