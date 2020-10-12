@@ -53,6 +53,7 @@ const popupPhotosSelector = '.popup-photos';
 const popupAddSelector = '.popup-add';
 const popupEditProfileSelector = '.popup-edit';
 const popupConfirmSelector = '.popup-confirm';
+const popupUpdateAvatarSelector = '.popup-update-avatar';
 
 // elements
 
@@ -60,6 +61,7 @@ const profileSectionElement = document.querySelector('.profile');
 const openFormButtonsList = Array.from(profileSectionElement.querySelectorAll(openFormButtonSelector));
 const addButtonElement = profileSectionElement.querySelector('.profile__add-button');
 const editButtonElement = profileSectionElement.querySelector('.profile__edit-button');
+const updateAvatarButtonElement = profileSectionElement.querySelector('.profile__avatar-edit-button');
 const popupEditProfileElement = document.querySelector('.popup-edit');
 
 const formsList = Array.from(document.forms);
@@ -171,6 +173,19 @@ const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
   }
 })
 
+const popupWithUpdateAvatarForm = new PopupWithForm(popupUpdateAvatarSelector, {
+  submit: (data) => {
+    api.setUserAvatar(data)
+      .then((res) => {
+        userInfo.setUserAvatar(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    popupWithUpdateAvatarForm.close();
+  }
+})
+
 addButtonElement.addEventListener('click', () => {
   popupWithAddForm.open();
 })
@@ -180,6 +195,10 @@ editButtonElement.addEventListener('click', () => {
   inputProfileNameElement.value = userData.name;
   inputProfileCaptionElement.value = userData.about;
   popupWithInfoForm.open();
+})
+
+updateAvatarButtonElement.addEventListener('click', () => {
+  popupWithUpdateAvatarForm.open();
 })
 
 const setFormValidation = (formElement) => {

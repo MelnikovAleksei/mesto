@@ -16,10 +16,14 @@ export class UserInfo {
     return data;
   }
 
+  setUserAvatar(data) {
+    this._avatar.src = data.avatar;
+  }
+
   setUserInfo(data) {
     this._name.textContent = data.name;
     this._caption.textContent = data.about;
-    this._avatar.src = data.avatar;
+    this.setUserAvatar(data);
     this._avatar.alt = `${data.name} avatar`;
   }
 }

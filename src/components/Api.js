@@ -4,6 +4,21 @@ export class Api {
     this._headers = options.headers;
   }
 
+  setUserAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
   deleteLike(data) {
     return fetch(`${this._url}/cards/likes/${data._id}`, {
       method: 'DELETE',
