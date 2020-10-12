@@ -62,6 +62,7 @@ const openFormButtonsList = Array.from(profileSectionElement.querySelectorAll(op
 const addButtonElement = profileSectionElement.querySelector('.profile__add-button');
 const editButtonElement = profileSectionElement.querySelector('.profile__edit-button');
 const updateAvatarButtonElement = profileSectionElement.querySelector('.profile__avatar-edit-button');
+
 const popupEditProfileElement = document.querySelector('.popup-edit');
 
 const formsList = Array.from(document.forms);
@@ -77,7 +78,6 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-
 
 api.getInitialData()
   .then((data) => {
@@ -156,7 +156,13 @@ const popupWithAddForm = new PopupWithForm(popupAddSelector, {
         const cardElement = card.generateCard();
         cardsList.addItem(cardElement, 'prepend');
       })
-    popupWithAddForm.close()
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupWithAddForm.renderLoading(false);
+        popupWithAddForm.close()
+      })
   }
 })
 
@@ -169,7 +175,10 @@ const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
       .catch((err) => {
         console.log(err);
       })
-    popupWithInfoForm.close();
+      .finally(() => {
+        popupWithInfoForm.renderLoading(false);
+        popupWithInfoForm.close();
+      })
   }
 })
 
@@ -182,7 +191,10 @@ const popupWithUpdateAvatarForm = new PopupWithForm(popupUpdateAvatarSelector, {
       .catch((err) => {
         console.log(err);
       })
-    popupWithUpdateAvatarForm.close();
+      .finally(() => {
+        popupWithUpdateAvatarForm.renderLoading(false);
+        popupWithUpdateAvatarForm.close();
+      })
   }
 })
 
