@@ -1,6 +1,5 @@
 import './index.css';
 
-import {initialCardsData} from '../utils/cardsData.js'
 import {Section} from '../components/Section.js';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -77,6 +76,14 @@ const createNewCard = (data) => {
   return card;
 }
 
+const cardsList = new Section({
+    renderer: (data) => {
+      const card = createNewCard(data)
+      const cardElement = card.generateCard();
+      cardsList.addItem(cardElement);
+    }
+  }, photoListSelector);
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
   headers: {
@@ -89,27 +96,20 @@ api.getInitialData()
   .then((data) => {
     const [userData, cardsData] = data;
     userInfo.setUserInfo(userData);
-    const cardsList = new Section({
-      items: cardsData,
-      renderer: (data) => {
-        const card = createNewCard(data)
-        const cardElement = card.generateCard();
-        cardsList.addItem(cardElement);
-      }
-    }, photoListSelector);
-    cardsList.renderItems();
+    cardsList.renderCards(cardsData);
   })
   .catch((err) => {
     console.log(err);
   })
 
-
-
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {
-    const card = createNewCard(data);
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement, 'prepend');
+    api.postCard(data)
+      .then((res) => {
+        const card = createNewCard(res);
+        const cardElement = card.generateCard();
+        cardsList.addItem(cardElement, 'prepend');
+      })
     popupWithAddForm.close()
   }
 })
