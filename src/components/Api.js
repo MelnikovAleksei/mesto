@@ -4,6 +4,30 @@ export class Api {
     this._headers = options.headers;
   }
 
+  deleteLike(data) {
+    return fetch(`${this._url}/cards/likes/${data._id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
+  setLike(data) {
+    return fetch(`${this._url}/cards/likes/${data._id}`, {
+      method: 'PUT',
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
   deleteCard(data) {
     return fetch(`${this._url}/cards/${data._id}`, {
       method: 'DELETE',

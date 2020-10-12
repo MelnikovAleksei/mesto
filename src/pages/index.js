@@ -109,7 +109,25 @@ const createNewCard = (data) => {
         }
       });
       confirmPopup.open(data);
-    }
+    },
+    setLike: (data) => {
+      api.setLike(data)
+        .then((data) => {
+          card.setLikeCount(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    },
+    deleteLike: (data) => {
+      api.deleteLike(data)
+        .then((data) => {
+          card.setLikeCount(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    },
   });
   return card;
 }
@@ -122,7 +140,7 @@ const cardsList = new Section({
     renderer: (data) => {
       const card = createNewCard(data);
       const cardElement = card.generateCard();
-      card.setLikeCount();
+      card.setLikeCount(data);
       cardsList.addItem(cardElement);
     }
   }, photoListSelector);

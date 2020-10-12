@@ -1,11 +1,13 @@
 export class Card {
-  constructor(data, templateSelector, settings, ownerId, { handleCardClick, handleDeleteCardClick }) {
+  constructor(data, templateSelector, settings, ownerId, { handleCardClick, handleDeleteCardClick, setLike, deleteLike }) {
     this._data = data;
     this._templateSelector = templateSelector;
     this._settings = settings;
     this._ownerId = ownerId
     this._handleCardClick = handleCardClick;
     this._handleDeleteCardClick = handleDeleteCardClick;
+    this._setLike = setLike;
+    this._deleteLike = deleteLike;
   }
 
   _getTemplateElement() {
@@ -26,12 +28,26 @@ export class Card {
     elem = null;
   }
 
-  _like() {
-    this._likeButton.classList.toggle(this._settings.photoLikedButtonClass);
+  _dislike(data) {
+    this._removeLikedClass();
+    this._deleteLike(data);
   }
 
-  setLikeCount() {
-    this._photoLikeCount.textContent = String(this._data.likes.length);
+  _like(data) {
+    this._addLikedClass();
+    this._setLike(data);
+  }
+
+  _removeLikedClass() {
+    this._likeButton.classList.remove(this._settings.photoLikedButtonClass);
+  }
+
+  _addLikedClass() {
+    this._likeButton.classList.add(this._settings.photoLikedButtonClass);
+  }
+
+  setLikeCount(data) {
+    this._photoLikeCount.textContent = String(data.likes.length);
   }
 
   _checkIsOwnCard() {
@@ -40,12 +56,24 @@ export class Card {
     }
   }
 
+  _checkLikedState() {
+    this._data.likes.forEach((likeOwner) => {
+      if (likeOwner._id === this._ownerId) {
+        this._addLikedClass();
+      }
+    })
+  }
+
   _setEventListeners() {
     this._photoImage.addEventListener('click', () => {
       this._handleCardClick(this._data);
     })
     this._likeButton.addEventListener('click', () => {
-      this._like();
+      if (this._likeButton.classList.contains(this._settings.photoLikedButtonClass)) {
+        this._dislike(this._data);
+      } else {
+        this._like(this._data);
+      }
     })
     this._deleteButton.addEventListener('click', this._handleDeleteCardClick);
   }
@@ -61,8 +89,10 @@ export class Card {
     this._photoImage.src = this._data.link;
     this._photoImage.alt = `Фотография ${this._data.name}`;
     this._photoFigcaption.textContent = this._data.name;
+    this.setLikeCount(this._data)
     this._setEventListeners();
     this._checkIsOwnCard();
+    this._checkLikedState();
     return this._element;
   }
 }
