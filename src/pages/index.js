@@ -44,6 +44,7 @@ const validationSettings = {
 const photoTemplateSelector = '#photos-element';
 const userNameSelector = '.profile__name';
 const userCaptionSelector = '.profile__caption';
+const userAvatarSelector = '.profile__avatar'
 const openFormButtonSelector = '.button-open-form';
 
 const photoListSelector = '.photos__list';
@@ -63,6 +64,10 @@ const formsList = Array.from(document.forms);
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
+
+const photoPopup = new PopupWithImage(popupPhotosSelector);
+const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
   headers: {
@@ -74,10 +79,9 @@ const api = new Api({
 api.getInitialData()
   .then((data) => {
     const [userData, cardsData] = data;
+    userInfo.setUserInfo(userData);
   })
 
-const photoPopup = new PopupWithImage(popupPhotosSelector);
-const userInfo = new UserInfo({ userNameSelector, userCaptionSelector });
 
 const createNewCard = (data) => {
   const card = new Card(data, photoTemplateSelector, photoCardSettings, {
