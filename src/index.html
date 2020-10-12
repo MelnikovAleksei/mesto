@@ -13,7 +13,10 @@
   <main>
     <section class="profile">
       <div class="profile__container-info">
-        <img alt="" class="profile__avatar">
+        <div class="profile__container-avatar">
+          <img alt="" class="profile__avatar">
+          <button class="profile__avatar-edit-button" aria-label="открыть форму обновления аватара профиля"></button>
+        </div>
         <div class="profile__bio">
           <div class="profile__info">
             <h1 class="profile__name"></h1>
@@ -79,6 +82,19 @@
           <button class="form__save-button">Да</button>
         </fieldset>
         <button type="reset" class="popup__close-button popup-confirm__close-button" aria-label="закрыть форму"></button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup-update-avatar">
+    <div class="popup__container">
+      <form class="form update-avatar-form" name="avatar" novalidate>
+        <h3 class="form__header">Обновить аватар</h3>
+        <fieldset class="form__fieldset">
+          <input class="form__input" type="url" id="avatar-link" aria-label="ссылка" placeholder="Ссылка на картинку" name="avatar" required>
+          <span class='form__input-error' id='avatar-link-error' role="status" aria-live="polite"></span>
+          <button class="form__save-button">Сохранить</button>
+        </fieldset>
+        <button type="reset" class="popup__close-button popup-update-avatar__close-button" aria-label="закрыть форму"></button>
       </form>
     </div>
   </div>
