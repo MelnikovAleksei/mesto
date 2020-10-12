@@ -1,8 +1,9 @@
 export class Card {
-  constructor(data, templateSelector, settings, { handleCardClick, handleDeleteCardClick }) {
+  constructor(data, templateSelector, settings, ownerId, { handleCardClick, handleDeleteCardClick }) {
     this._data = data;
     this._templateSelector = templateSelector;
     this._settings = settings;
+    this._ownerId = ownerId
     this._handleCardClick = handleCardClick;
     this._handleDeleteCardClick = handleDeleteCardClick;
   }
@@ -16,9 +17,13 @@ export class Card {
     return cardElement;
   }
 
-  _delete() {
-    this._element.remove();
-    this._element = null;
+  deleteCard() {
+    this._deleteElem(this._element);
+  }
+
+  _deleteElem(elem) {
+    elem.remove();
+    elem = null;
   }
 
   _like() {
@@ -29,6 +34,12 @@ export class Card {
     this._photoLikeCount.textContent = String(this._data.likes.length);
   }
 
+  _checkIsOwnCard() {
+    if (this._data.owner._id !== this._ownerId) {
+      this._deleteElem(this._deleteButton);
+    }
+  }
+
   _setEventListeners() {
     this._photoImage.addEventListener('click', () => {
       this._handleCardClick(this._data);
@@ -36,9 +47,7 @@ export class Card {
     this._likeButton.addEventListener('click', () => {
       this._like();
     })
-    this._deleteButton.addEventListener('click', () => {
-      this._handleDeleteCardClick(this._data);
-    })
+    this._deleteButton.addEventListener('click', this._handleDeleteCardClick);
   }
 
   generateCard() {
@@ -48,10 +57,12 @@ export class Card {
     this._likeButton = this._element.querySelector(this._settings.photoLikeButtonSelector);
     this._photoLikeCount = this._element.querySelector(this._settings.photoLikeCountSelector);
     this._deleteButton = this._element.querySelector(this._settings.photoDeleteButtonSelector);
+    this._element.setAttribute('id', `a${this._data._id}`);
     this._photoImage.src = this._data.link;
     this._photoImage.alt = `Фотография ${this._data.name}`;
     this._photoFigcaption.textContent = this._data.name;
     this._setEventListeners();
+    this._checkIsOwnCard();
     return this._element;
   }
 }

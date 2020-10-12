@@ -66,22 +66,57 @@ const formsList = Array.from(document.forms);
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
+let ownerId = '';
 
-const photoPopup = new PopupWithImage(popupPhotosSelector);
-const confirmPopup = new PopupWithConfirm(popupConfirmSelector);
-const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
+  headers: {
+    authorization: 'ff425bea-a4ea-4692-b47e-32fb337d2063',
+    'Content-Type': 'application/json'
+  }
+});
+
+
+api.getInitialData()
+  .then((data) => {
+    const [userData, cardsData] = data;
+    ownerId = userData._id;
+    userInfo.setUserInfo(userData);
+    cardsList.renderCards(cardsData);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 
 const createNewCard = (data) => {
-  const card = new Card(data, photoTemplateSelector, photoCardSettings, {
+  const card = new Card(data, photoTemplateSelector, photoCardSettings, ownerId, {
     handleCardClick: (data) => {
       photoPopup.open(data);
     },
     handleDeleteCardClick: () => {
-      confirmPopup.open();
+      const confirmPopup = new PopupWithConfirm(popupConfirmSelector, {
+        submit: (data) => {
+          api.deleteCard(data)
+            .then(() => {
+              cardsList.deleteItem(`a${data._id}`)
+            })
+            .then(() => {
+              confirmPopup.close();
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        }
+      });
+      confirmPopup.open(data);
     }
   });
   return card;
 }
+
+const photoPopup = new PopupWithImage(popupPhotosSelector);
+
+const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
 
 const cardsList = new Section({
     renderer: (data) => {
@@ -92,23 +127,6 @@ const cardsList = new Section({
     }
   }, photoListSelector);
 
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
-  headers: {
-    authorization: 'ff425bea-a4ea-4692-b47e-32fb337d2063',
-    'Content-Type': 'application/json'
-  }
-});
-
-api.getInitialData()
-  .then((data) => {
-    const [userData, cardsData] = data;
-    userInfo.setUserInfo(userData);
-    cardsList.renderCards(cardsData);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
 
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {

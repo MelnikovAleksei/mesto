@@ -4,6 +4,18 @@ export class Api {
     this._headers = options.headers;
   }
 
+  deleteCard(data) {
+    return fetch(`${this._url}/cards/${data._id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
   postCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',

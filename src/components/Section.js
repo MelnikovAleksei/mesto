@@ -4,6 +4,12 @@ export class Section {
     this._container = document.querySelector(containerSelector);
   }
 
+  deleteItem(id) {
+    let card = document.querySelector(`#${id}`);
+    card.remove();
+    card = null;
+  }
+
   renderCards(cardsData) {
     cardsData.forEach(card => {
       this._renderer(card);
