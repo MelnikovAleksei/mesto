@@ -7,6 +7,7 @@ import {FormValidator} from '../components/FormValidator.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
+import {Api} from '../components/Api.js';
 
 // settings
 
@@ -61,6 +62,19 @@ const popupEditProfileElement = document.querySelector('.popup-edit');
 const formsList = Array.from(document.forms);
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
+  headers: {
+    authorization: 'ff425bea-a4ea-4692-b47e-32fb337d2063',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getInitialData()
+  .then((data) => {
+    const [userData, cardsData] = data;
+  })
 
 const photoPopup = new PopupWithImage(popupPhotosSelector);
 const userInfo = new UserInfo({ userNameSelector, userCaptionSelector });
