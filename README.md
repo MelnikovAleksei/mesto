@@ -6,7 +6,7 @@
 
 "Mesto" - это интерактивная страница, где пользователи могут делиться фотографиями. Она создана в рамках прохождения 4-8 спринтов курса. В работе применены расширенные возможности HTML и CSS, JavaScript (ООП в интерфейсах, работа с DOM), проверка данных форм, git, Webpack. 
 
-[Проектная работа на GitHub Pages](https://melnikovaleksei.github.io/mesto/) 
+[Проектная работа на GitHub Pages](https://melnikovaleksei.github.io/mesto/index.html) 
 
 ## Функционал: 
 
