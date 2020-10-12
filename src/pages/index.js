@@ -71,6 +71,18 @@ const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profi
 
 let ownerId = '';
 
+const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
+const cardsList = new Section({
+  renderer: (data) => {
+    const card = createNewCard(data);
+    const cardElement = card.generateCard();
+    card.setLikeCount(data);
+    cardsList.addItem(cardElement);
+  }
+}, photoListSelector);
+const photoPopup = new PopupWithImage(popupPhotosSelector);
+
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
   headers: {
@@ -133,19 +145,6 @@ const createNewCard = (data) => {
   });
   return card;
 }
-
-const photoPopup = new PopupWithImage(popupPhotosSelector);
-
-const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
-
-const cardsList = new Section({
-    renderer: (data) => {
-      const card = createNewCard(data);
-      const cardElement = card.generateCard();
-      card.setLikeCount(data);
-      cardsList.addItem(cardElement);
-    }
-  }, photoListSelector);
 
 
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
