@@ -4,7 +4,7 @@
 
 *Read this in other languages:* [RU](https://github.com/MelnikovAleksei/mesto/blob/master/README.md) 
 
-[Project work on GitHub Pages](https://melnikovaleksei.github.io/mesto/) 
+[Project work on GitHub Pages](https://melnikovaleksei.github.io/mesto/index.html) 
 
 ## Description:
 
