@@ -24,6 +24,10 @@ export class Card {
     this._likeButton.classList.toggle(this._settings.photoLikedButtonClass);
   }
 
+  setLikeCount() {
+    this._photoLikeCount.textContent = String(this._data.likes.length);
+  }
+
   _setEventListeners() {
     this._photoImage.addEventListener('click', () => {
       this._handleCardClick(this._data);
@@ -42,6 +46,7 @@ export class Card {
     this._element = this._getTemplateElement();
     this._photoImage = this._element.querySelector(this._settings.photoImageSelector);
     this._photoFigcaption = this._element.querySelector(this._settings.photoFigcaptionSelector);
+    this._photoLikeCount = this._element.querySelector(this._settings.photoLikeCountSelector);
     this._photoImage.src = this._data.link;
     this._photoImage.alt = `Фотография ${this._data.name}`;
     this._photoFigcaption.textContent = this._data.name;

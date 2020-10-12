@@ -16,6 +16,7 @@ const photoCardSettings = {
   photoImageSelector: '.photos__image',
   photoFigcaptionSelector: '.photos__figcaption',
   photoLikeButtonSelector: '.photos__like-button',
+  photoLikeCountSelector: '.photos__like-count',
   photoDeleteButtonSelector: '.photos__delete-button',
   photoImageClass: 'photos__image',
   photoLikeButtonClass: 'photos__like-button',
@@ -78,8 +79,9 @@ const createNewCard = (data) => {
 
 const cardsList = new Section({
     renderer: (data) => {
-      const card = createNewCard(data)
+      const card = createNewCard(data);
       const cardElement = card.generateCard();
+      card.setLikeCount();
       cardsList.addItem(cardElement);
     }
   }, photoListSelector);
