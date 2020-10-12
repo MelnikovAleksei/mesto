@@ -149,6 +149,7 @@ const createNewCard = (data) => {
 
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {
+    popupWithAddForm.renderLoading(true);
     api.postCard(data)
       .then((res) => {
         const card = createNewCard(res);
@@ -167,6 +168,7 @@ const popupWithAddForm = new PopupWithForm(popupAddSelector, {
 
 const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
   submit: (data) => {
+    popupWithInfoForm.renderLoading(true, 'Загрузка...');
     api.setUserInfo(data)
       .then((res) => {
         userInfo.setUserInfo(res);
@@ -183,6 +185,7 @@ const popupWithInfoForm = new PopupWithForm(popupEditProfileSelector, {
 
 const popupWithUpdateAvatarForm = new PopupWithForm(popupUpdateAvatarSelector, {
   submit: (data) => {
+    popupWithUpdateAvatarForm.renderLoading(true);
     api.setUserAvatar(data)
       .then((res) => {
         userInfo.setUserAvatar(res);

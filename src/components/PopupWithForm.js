@@ -10,9 +10,9 @@ export class PopupWithForm extends Popup {
     this._submitEvtHandler = this._submitEvtHandler.bind(this);
   }
 
-  renderLoading(isLoading) {
+  renderLoading(isLoading, initialDownloadMessage = 'Cохранение...') {
     if (isLoading) {
-      this._submitButton.textContent = 'Cохранение...';
+      this._submitButton.textContent = initialDownloadMessage;
     } else {
       this._submitButton.textContent = this._initialValueSubmitButton;
     }
@@ -20,7 +20,6 @@ export class PopupWithForm extends Popup {
 
   _submitEvtHandler(evt) {
     evt.preventDefault();
-    this.renderLoading(true);
     this._submit(this._getInputValues());
   }
 
