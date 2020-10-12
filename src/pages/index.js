@@ -5,6 +5,7 @@ import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
+import {PopupWithConfirm} from '../components/PopupWithConfirm.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {Api} from '../components/Api.js';
 
@@ -51,6 +52,7 @@ const photoListSelector = '.photos__list';
 const popupPhotosSelector = '.popup-photos';
 const popupAddSelector = '.popup-add';
 const popupEditProfileSelector = '.popup-edit';
+const popupConfirmSelector = '.popup-confirm';
 
 // elements
 
@@ -66,12 +68,16 @@ const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profi
 
 
 const photoPopup = new PopupWithImage(popupPhotosSelector);
+const confirmPopup = new PopupWithConfirm(popupConfirmSelector);
 const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
 
 const createNewCard = (data) => {
   const card = new Card(data, photoTemplateSelector, photoCardSettings, {
     handleCardClick: (data) => {
       photoPopup.open(data);
+    },
+    handleDeleteCardClick: () => {
+      confirmPopup.open();
     }
   });
   return card;

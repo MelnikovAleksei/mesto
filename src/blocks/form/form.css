@@ -1,7 +1,6 @@
 .form {
     padding: 34px 36px 30px 36px;
     width: 430px;
-    min-height: 330px;
     display: flex;
     flex-direction: column;
     align-items: center;

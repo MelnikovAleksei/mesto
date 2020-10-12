@@ -71,6 +71,17 @@
       <button class="popup__close-button popup-photos__close-button" aria-label="закрыть просмотр фотографии"></button>
     </div>
   </div>
+  <div class="popup popup-confirm">
+    <div class="popup__container">
+      <form class="form confirm-form" name="confirm" novalidate>
+        <h3 class="form__header">Вы уверены?</h3>
+        <fieldset class="form__fieldset">
+          <button class="form__save-button">Да</button>
+        </fieldset>
+        <button type="reset" class="popup__close-button popup-confirm__close-button" aria-label="закрыть форму"></button>
+      </form>
+    </div>
+  </div>
   <template id="photos-element">
     <li class="photos__card">
       <figure class="photos__figure">
