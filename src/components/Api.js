@@ -4,6 +4,13 @@ export class Api {
     this._headers = options.headers;
   }
 
+  _handleOriginalResponse(res) {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  }
+
   setUserAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
@@ -11,48 +18,28 @@ export class Api {
       body: JSON.stringify({
         avatar: data.avatar
       })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(this._handleOriginalResponse)
   }
 
   deleteLike(data) {
     return fetch(`${this._url}/cards/likes/${data._id}`, {
       method: 'DELETE',
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(this._handleOriginalResponse)
   }
 
   setLike(data) {
     return fetch(`${this._url}/cards/likes/${data._id}`, {
       method: 'PUT',
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(this._handleOriginalResponse)
   }
 
   deleteCard(data) {
     return fetch(`${this._url}/cards/${data._id}`, {
       method: 'DELETE',
       headers: this._headers
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(this._handleOriginalResponse)
   }
 
   postCard(data) {
@@ -63,12 +50,7 @@ export class Api {
         name: data.name,
         link: data.link
       })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(this._handleOriginalResponse)
   }
 
   setUserInfo(data) {
@@ -79,12 +61,7 @@ export class Api {
         name: data.name,
         about: data.about
       })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(this._handleOriginalResponse)
   }
 
   getInitialData() {
@@ -95,23 +72,13 @@ export class Api {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
       headers: this._headers
-    }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    }).then(this._handleOriginalResponse)
   }
 
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers
-    }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    }).then(this._handleOriginalResponse)
   }
 }
