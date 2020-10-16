@@ -77,11 +77,10 @@ const cardsList = new Section({
     const card = createNewCard(data);
     const cardElement = card.generateCard();
     card.setLikeCount(data);
-    cardsList.addItem(cardElement);
+    cardsList.addItem(cardElement, 'append');
   }
 }, photoListSelector);
 const photoPopup = new PopupWithImage(popupPhotosSelector);
-
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
@@ -102,27 +101,28 @@ api.getInitialData()
     console.log(err);
   })
 
+const popupWithConfirm = new PopupWithConfirm(popupConfirmSelector, {
+  submit: (data) => {
+    api.deleteCard(data)
+      .then(() => {
+        cardsList.deleteItem(`a${data._id}`);
+      })
+      .then(() => {
+        popupWithConfirm.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+})
+
 const createNewCard = (data) => {
   const card = new Card(data, photoTemplateSelector, photoCardSettings, ownerId, {
     handleCardClick: (data) => {
       photoPopup.open(data);
     },
     handleDeleteCardClick: () => {
-      const confirmPopup = new PopupWithConfirm(popupConfirmSelector, {
-        submit: (data) => {
-          api.deleteCard(data)
-            .then(() => {
-              cardsList.deleteItem(`a${data._id}`)
-            })
-            .then(() => {
-              confirmPopup.close();
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-        }
-      });
-      confirmPopup.open(data);
+      popupWithConfirm.open(data);
     },
     setLike: (data) => {
       api.setLike(data)
@@ -145,7 +145,6 @@ const createNewCard = (data) => {
   });
   return card;
 }
-
 
 const popupWithAddForm = new PopupWithForm(popupAddSelector, {
   submit: (data) => {

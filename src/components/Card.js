@@ -19,10 +19,6 @@ export class Card {
     return cardElement;
   }
 
-  deleteCard() {
-    this._deleteElem(this._element);
-  }
-
   _deleteElem(elem) {
     elem.remove();
     elem = null;
