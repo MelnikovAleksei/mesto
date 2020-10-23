@@ -69,7 +69,8 @@ const formsList = Array.from(document.forms);
 const inputProfileNameElement = popupEditProfileElement.querySelector('#profile-name');
 const inputProfileCaptionElement = popupEditProfileElement.querySelector('#profile-caption');
 
-let ownerId = '';
+let tempCard = null;
+let ownerId = null;
 
 const userInfo = new UserInfo({ userNameSelector, userCaptionSelector, userAvatarSelector });
 const cardsList = new Section({
@@ -105,9 +106,10 @@ const popupWithConfirm = new PopupWithConfirm(popupConfirmSelector, {
   submit: (data) => {
     api.deleteCard(data)
       .then(() => {
-        cardsList.deleteItem(`a${data._id}`);
+        tempCard.deleteCard();
       })
       .then(() => {
+        tempCard = null;
         popupWithConfirm.close();
       })
       .catch((err) => {
@@ -122,6 +124,7 @@ const createNewCard = (data) => {
       photoPopup.open(data);
     },
     handleDeleteCardClick: () => {
+      tempCard = card;
       popupWithConfirm.open(data);
     },
     setLike: (data) => {
