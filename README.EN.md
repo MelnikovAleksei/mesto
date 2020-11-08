@@ -46,7 +46,7 @@ npm run dev
 
 ## Future revisions of the project will include: 
 
-* [port to Reactjs(repository link)](https://github.com/MelnikovAleksei/mesto-react) 
+* [port to Reactjs (repository link)](https://github.com/MelnikovAleksei/mesto-react) 
 
 ## Languages: 
 
