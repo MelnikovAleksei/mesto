@@ -46,7 +46,7 @@ npm run dev
 
 ## Будущая доработка проекта будет включать в себя: 
 
-* [перенос кода на библиотеку Reactjs(ссылка на репозиторий](https://github.com/MelnikovAleksei/mesto-react) 
+* [перенос кода на библиотеку Reactjs (ссылка на репозиторий)](https://github.com/MelnikovAleksei/mesto-react) 
 
 ## Языки: 
 
